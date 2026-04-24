@@ -37,7 +37,7 @@ function App() {
   const [syncStatus, setSyncStatus] = useState('connecting'); // connecting | live | error
   const [openId, setOpenId] = useState(null);
   const [playerFilter, setPlayerFilter] = useState(tweaks.showOnly3to5 ? 'grandma' : 'all');
-  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [categoryFilters, setCategoryFilters] = useState(new Set());
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [sort, setSort] = useState('featured');
 
@@ -64,9 +64,18 @@ function App() {
   }, []);
 
   const categories = useMemo(() => {
-    const s = new Set(allGames.map(g => g.category));
-    return ['all', ...Array.from(s).sort()];
+    const s = new Set(allGames.flatMap(g => g.categories));
+    return Array.from(s).sort();
   }, [allGames]);
+
+  function toggleCategory(cat) {
+    setCategoryFilters(prev => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
+  }
 
   const filtered = useMemo(() => {
     let list = allGames;
@@ -75,7 +84,7 @@ function App() {
       const n = parseInt(playerFilter, 10);
       list = list.filter(g => g.players.includes(n));
     }
-    if (categoryFilter !== 'all') list = list.filter(g => g.category === categoryFilter);
+    if (categoryFilters.size > 0) list = list.filter(g => g.categories.some(c => categoryFilters.has(c)));
     if (difficultyFilter === 'easy') list = list.filter(g => g.difficulty <= 2);
     else if (difficultyFilter === 'medium') list = list.filter(g => g.difficulty === 3);
     else if (difficultyFilter === 'hard') list = list.filter(g => g.difficulty >= 4);
@@ -93,7 +102,7 @@ function App() {
     else if (sort === 'rated') copy.sort((a, b) => avgFor(b) - avgFor(a));
     // 'featured' keeps default order
     return copy;
-  }, [allGames, playerFilter, categoryFilter, difficultyFilter, sort, plays]);
+  }, [allGames, playerFilter, categoryFilters, difficultyFilter, sort, plays]);
 
   const openGame = filtered.find(g => g.id === openId) || allGames.find(g => g.id === openId);
 
@@ -188,14 +197,15 @@ function App() {
         </div>
       </section>
 
-      {categories.length > 2 && (
+      {categories.length > 1 && (
         <section className="filters" style={{ marginTop: 0 }}>
           <div className="filter-group">
             <span className="filter-label">Style</span>
+            {categoryFilters.size > 0 && (
+              <Chip active={false} onClick={() => setCategoryFilters(new Set())}>Clear</Chip>
+            )}
             {categories.map(c => (
-              <Chip key={c} active={categoryFilter === c} onClick={() => setCategoryFilter(c)}>
-                {c === 'all' ? 'All styles' : c}
-              </Chip>
+              <Chip key={c} active={categoryFilters.has(c)} onClick={() => toggleCategory(c)}>{c}</Chip>
             ))}
           </div>
         </section>

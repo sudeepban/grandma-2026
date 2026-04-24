@@ -11,7 +11,7 @@ function GameCard({ game, onOpen, plays }) {
       <CardCorner rank={game.corner?.rank || 'A'} suit={game.corner?.suit || 'spades'} rotated />
 
       <div className="gc-top">
-        <span className="gc-cat">{game.category}</span>
+        <span className="gc-cat">{game.categories[0]}</span>
         {avgRating !== null && (
           <span className="gc-avg" title="Average rating from play log">
             <span className="gc-avg-star">★</span>
@@ -67,7 +67,7 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
         <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
 
         <div className="modal-header">
-          <span className="md-cat">{game.category}</span>
+          <span className="md-cat">{game.categories.join(' · ')}</span>
           <h2 className="md-title">{game.name}</h2>
           <p className="md-tagline">{game.tagline}</p>
         </div>
