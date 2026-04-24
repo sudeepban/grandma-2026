@@ -224,12 +224,12 @@ function App() {
         <section className="filters" style={{ marginTop: 0 }}>
           <div className="filter-group">
             <span className="filter-label">Style</span>
-            {categoryFilters.size > 0 && (
-              <Chip active={false} onClick={() => setCategoryFilters(new Set())}>Clear</Chip>
-            )}
             {categories.map(c => (
               <Chip key={c} active={categoryFilters.has(c)} onClick={() => toggleCategory(c)}>{c}</Chip>
             ))}
+            {categoryFilters.size > 0 && (
+              <Chip active={false} onClick={() => setCategoryFilters(new Set())}>Clear</Chip>
+            )}
           </div>
         </section>
       )}
