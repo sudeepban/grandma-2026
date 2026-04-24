@@ -84,7 +84,7 @@ function App() {
       const n = parseInt(playerFilter, 10);
       list = list.filter(g => g.players.includes(n));
     }
-    if (categoryFilters.size > 0) list = list.filter(g => g.categories.some(c => categoryFilters.has(c)));
+    if (categoryFilters.size > 0) list = list.filter(g => Array.from(categoryFilters).every(c => g.categories.includes(c)));
     if (difficultyFilter === 'easy') list = list.filter(g => g.difficulty <= 2);
     else if (difficultyFilter === 'medium') list = list.filter(g => g.difficulty === 3);
     else if (difficultyFilter === 'hard') list = list.filter(g => g.difficulty >= 4);
