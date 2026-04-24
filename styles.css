@@ -72,6 +72,7 @@ input, textarea, select { font-family: inherit; color: inherit; }
   font-size: 22px;
   color: var(--burgundy);
   letter-spacing: 6px;
+  white-space: nowrap;
 }
 
 .title-block {
@@ -174,36 +175,47 @@ input, textarea, select { font-family: inherit; color: inherit; }
 
 .filters {
   max-width: 1240px;
-  margin: 40px auto 24px;
-  padding: 0 32px;
+  margin: 28px auto 0;
+  padding: 8px 32px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
+  gap: 6px 20px;
   justify-content: space-between;
+  background: var(--cream-soft);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.filters + .filters {
+  border-top: 1px dashed var(--rule);
+}
+.filters:last-of-type {
+  margin-bottom: 20px;
 }
 .filter-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 6px;
   align-items: center;
+  padding: 4px 0;
 }
 .filter-label {
   font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.2em;
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  margin-right: 6px;
+  margin-right: 4px;
+  white-space: nowrap;
 }
 
 .chip {
   border: 1px solid var(--rule-strong);
   background: var(--cream);
   color: var(--ink-soft);
-  padding: 9px 18px;
+  padding: 5px 13px;
   border-radius: 999px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.01em;
   transition: all 0.15s;
@@ -217,11 +229,11 @@ input, textarea, select { font-family: inherit; color: inherit; }
 .chip-active:hover { color: var(--cream); background: var(--burgundy-deep); }
 
 .sort-select {
-  padding: 9px 34px 9px 16px;
+  padding: 5px 28px 5px 13px;
   border: 1px solid var(--rule-strong);
   border-radius: 999px;
-  background: var(--cream) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 14px center;
-  font-size: 16px;
+  background: var(--cream) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 12px center;
+  font-size: 15px;
   color: var(--ink-soft);
   appearance: none;
   cursor: pointer;
@@ -1033,6 +1045,13 @@ input, textarea, select { font-family: inherit; color: inherit; }
   .pf-row { grid-template-columns: 1fr; }
   .site-header { padding: 36px 20px 20px; }
   .filters, .games-grid, .site-footer { padding-left: 20px; padding-right: 20px; }
+  .filters { gap: 0; justify-content: flex-start; }
+  .filter-group {
+    width: 100%;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .filter-group:last-child { border-bottom: none; padding-bottom: 4px; }
 }
 
 /* Scrollbar polish */
