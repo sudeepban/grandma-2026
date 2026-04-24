@@ -133,7 +133,7 @@ function App() {
             Card Games for Grandma
           </h1>
           <p className="site-sub">
-            These are your games, Grandma — twenty-five of the best, all perfect for a table of three to five.
+            These are your games, Grandma — 25+ of the best, all perfect for a table of three to five.
             Pick one, play it tonight, and we'll log how it went so we never forget which ones were your favorites.
           </p>
         </div>
