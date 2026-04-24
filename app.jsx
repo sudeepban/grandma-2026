@@ -6,8 +6,8 @@ const { useState, useEffect, useMemo } = React;
 
 function durationCategory(minutes) {
   if (minutes <= 15) return 'Quick';
-  if (minutes <= 35) return 'Medium';
-  return 'Long';
+  if (minutes > 35) return 'Long';
+  return null;
 }
 
 // Decorate games with a corner suit/rank for visual flair, and inject a duration category
@@ -21,7 +21,7 @@ function decorateGames(games) {
   return games.map((g, i) => ({
     ...g,
     corner: combos[i % combos.length],
-    categories: [...g.categories, durationCategory(g.minutes)],
+    categories: [...g.categories, ...(durationCategory(g.minutes) ? [durationCategory(g.minutes)] : [])],
   }));
 }
 

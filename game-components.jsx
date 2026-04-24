@@ -1,9 +1,7 @@
 // GameCard + GameDetail modal + PlayLog entry form
 
 function GameCard({ game, onOpen, plays }) {
-  const avgRating = plays.length
-    ? (plays.reduce((s, p) => s + p.rating, 0) / plays.length)
-    : null;
+  const playerAvgs = perPlayerAverages(plays);
   const accent = game.accent || 'burgundy';
   return (
     <article className={`game-card accent-${accent}`} onClick={() => onOpen(game)}>
@@ -12,10 +10,15 @@ function GameCard({ game, onOpen, plays }) {
 
       <div className="gc-top">
         <span className="gc-cat">{game.categories.join(' · ')}</span>
-        {avgRating !== null && (
-          <span className="gc-avg" title="Average rating from play log">
-            <span className="gc-avg-star">★</span>
-            {avgRating.toFixed(1)}
+        {playerAvgs.length > 0 && (
+          <span className="gc-avg" title="Per-player averages">
+            {playerAvgs.map(({ name, avg }) => (
+              <span key={name} className="gc-avg-player">
+                <span className="gc-avg-name">{name[0]}</span>
+                <span className="gc-avg-star">★</span>
+                {avg.toFixed(1)}
+              </span>
+            ))}
           </span>
         )}
       </div>
@@ -43,6 +46,22 @@ function GameCard({ game, onOpen, plays }) {
   );
 }
 
+function perPlayerAverages(plays) {
+  const map = {};
+  for (const play of plays) {
+    if (!Array.isArray(play.ratings)) continue;
+    for (const r of play.ratings) {
+      if (!r.name) continue;
+      if (!map[r.name]) map[r.name] = { total: 0, count: 0 };
+      map[r.name].total += r.rating;
+      map[r.name].count += 1;
+    }
+  }
+  return Object.entries(map)
+    .map(([name, { total, count }]) => ({ name, avg: total / count, count }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
   const [tab, setTab] = React.useState('how');
   const [formOpen, setFormOpen] = React.useState(false);
@@ -54,9 +73,7 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
   }, [onClose]);
 
   if (!game) return null;
-  const avgRating = plays.length
-    ? (plays.reduce((s, p) => s + p.rating, 0) / plays.length)
-    : null;
+  const playerAvgs = perPlayerAverages(plays);
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -121,18 +138,16 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
 
         {tab === 'log' && (
           <div className="log-wrap">
-            {avgRating !== null && (
+            {playerAvgs.length > 0 && (
               <div className="log-summary">
-                <div className="log-summary-num">
-                  <span className="lsn-val">{avgRating.toFixed(1)}</span>
-                  <span className="lsn-of">/ 5</span>
-                </div>
-                <div className="log-summary-meta">
-                  <StarRating value={Math.round(avgRating)} readOnly />
-                  <span className="log-summary-label">
-                    Average over {plays.length} play{plays.length > 1 ? 's' : ''}
-                  </span>
-                </div>
+                {playerAvgs.map(({ name, avg, count }) => (
+                  <div key={name} className="log-summary-player">
+                    <span className="lsp-name">{name}</span>
+                    <StarRating value={Math.round(avg)} readOnly />
+                    <span className="lsp-val">{avg.toFixed(1)}</span>
+                    <span className="lsp-count">{count} play{count > 1 ? 's' : ''}</span>
+                  </div>
+                ))}
               </div>
             )}
 
@@ -173,7 +188,7 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
 
 function PlayLogForm({ game, onCancel, onSubmit }) {
   const [playerRatings, setPlayerRatings] = React.useState(
-    Array.from({ length: game.best || 3 }, () => ({ name: '', rating: 0 }))
+    Array.from({ length: 3 }, () => ({ name: '', rating: 0 }))
   );
   const [date, setDate] = React.useState(() => new Date().toISOString().slice(0, 10));
   const [note, setNote] = React.useState('');
@@ -181,7 +196,13 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
 
   const canSubmit = playerRatings.length > 0 && playerRatings.every(p => p.name.trim() && p.rating > 0);
 
+  const NAME_SHORTCUTS = { g: 'Grandma', k: 'Kiran', m: 'Mia', d: 'Deep', s: 'Samantha' };
+
   function updatePlayer(i, field, value) {
+    if (field === 'name' && value.length === 1) {
+      const expanded = NAME_SHORTCUTS[value.toLowerCase()];
+      if (expanded && playerRatings[i].name === '') value = expanded;
+    }
     setPlayerRatings(prev => prev.map((p, idx) => idx === i ? { ...p, [field]: value } : p));
   }
 
@@ -266,7 +287,7 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
           rows="3"
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="Shot the moon twice. Tea spilled. Will play again."
+          placeholder={game.notePlaceholder || 'What happened? Who surprised everyone?'}
         />
       </div>
 
