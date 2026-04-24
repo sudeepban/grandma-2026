@@ -16,10 +16,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Shot the moon. No one saw it coming.',
     description: 'A classic trick-taking game where you try to take the fewest points. Every heart is 1 point, the Queen of Spades is a dreaded 13. Low score wins. Or shoot the moon and take them all.',
     howTo: [
-      'Deal all cards evenly (remove 2♣ for 3/5 players).',
-      'Pass 3 cards each round (left, right, across, hold).',
-      'The 2♣ leads the first trick; follow suit if you can.',
-      'Score 1 per heart taken, 13 for the Q♠. First to 100 loses.'
+      'For 3 or 5 players, remove the 2♣ so cards deal evenly. Shuffle and deal all remaining cards so every player has the same number.',
+      'Passing: before the first trick, each player secretly selects 3 cards and passes them simultaneously — to the left in round 1, to the right in round 2, across in round 3, and no pass in round 4. This 4-round cycle repeats.',
+      'The player holding the 2♣ must lead it to open the very first trick. On all subsequent tricks, the leader may play any card — except hearts cannot be led until a heart has been played on a prior trick (this is called "breaking hearts").',
+      'Every other player must follow the suit that was led, if they have any cards of that suit. If you cannot follow suit, you may play any card in your hand — including a heart or the Queen of Spades.',
+      'The highest card of the suit that was led wins the trick. There is no trump suit. The winner of a trick leads the next one.',
+      'Hearts are worth 1 point each; the Queen of Spades (Q♠) is worth 13 points. All other cards score zero. Lower points are better — you want to AVOID taking hearts and the Queen.',
+      'Shooting the Moon: if one player manages to take ALL 13 hearts AND the Q♠ in a single hand, they score zero and every other player scores 26 instead. This is rare and risky but very satisfying.',
+      'After all tricks are played, add up each player\'s points for that hand. Running totals carry forward across hands.',
+      'The game ends when any player reaches 100 points. At that moment, the player with the LOWEST total score wins.'
     ]
   },
   {
@@ -36,10 +41,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Overbid by 4. Sandbags caught up with us.',
     description: 'Partnership trick-taking with spades as permanent trump. Bid the number of tricks you\'ll win, then try to hit your bid exactly. Overbids sting, underbids are disastrous.',
     howTo: [
-      'Deal 13 cards to each of 4 players (partners across).',
-      'Each player bids the number of tricks they expect.',
-      'Spades are always trump; can\'t be led until "broken."',
-      'Score 10 × bid if made, plus 1 per overtrick (sandbag).'
+      'Seat partners across from each other. Deal 13 cards to each of the 4 players. No trump card is turned up — spades are always trump, automatically.',
+      'Bidding: starting with the player to the dealer\'s left, each player bids a number from 0 to 13, representing how many tricks they personally expect to win. Your team\'s combined bid is what you must both achieve together.',
+      'Special bid — Nil: bidding zero means you\'re betting you won\'t take a single trick this hand. Success earns your team +100 bonus points; failure (taking even one trick) costs your team −100. Your partner still bids and plays normally.',
+      'The player to the dealer\'s left leads the first trick. All others must follow suit if possible. If you cannot follow suit, play any card — including a spade.',
+      'Spades are always trump and beat every card of every other suit. However, you may NOT lead spades until they have been "broken" — meaning someone played a spade on a trick they couldn\'t follow suit on. Exception: if you have nothing but spades, you may lead them.',
+      'The highest spade played wins any trick that contains spades. If no spades are played, the highest card of the suit led wins. The winner of a trick leads the next one.',
+      'Scoring when you make your bid: your team scores 10 × your combined bid. Example: if you and your partner bid 3 and 4 (combined 7) and you take exactly 7 tricks, score 70.',
+      'Overtricks are "sandbags" — each one over your bid scores only 1 point. Accumulate 10 sandbags over multiple hands and your team is penalized 100 points.',
+      'If your team fails to reach your combined bid, you lose 10 × your combined bid. Example: bid 7, take only 5 tricks — lose 70 points.',
+      'First team to 500 points wins. If a team falls to −200, they lose immediately.'
     ]
   },
   {
@@ -56,10 +67,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Laid down a clean run on the very first turn.',
     description: 'The grandmother of matching games. Draw a card, lay down sets or runs, discard. First to go out wins the hand; losers pay the value of cards left in hand.',
     howTo: [
-      'Deal 7–10 cards depending on player count.',
-      'On your turn: draw from stock or discard, then discard.',
-      'Meld sets (3+ same rank) or runs (3+ consecutive, same suit).',
-      'Going out ends the hand; count pip value of opponents\' cards.'
+      'Deal cards: 10 each for 2 players, 7 each for 3–4 players, 6 each for 5–6 players. Place the rest face-down as the stock pile. Flip the top card face-up next to it to start the discard pile.',
+      'There are two types of melds you\'re trying to form. Sets: three or four cards of the same rank (e.g., 7♠ 7♥ 7♦). Runs: three or more consecutive cards of the same suit (e.g., 4♣ 5♣ 6♣ 7♣).',
+      'On your turn, first draw one card. You may take either the top card of the face-down stock, OR the top card of the face-up discard pile. You cannot take a buried discard card.',
+      'After drawing, you may lay down any completed melds face-up on the table in front of you. You may also "lay off" single cards onto ANY meld already on the table (yours or an opponent\'s), as long as the card fits.',
+      'End your turn by discarding one card face-up onto the discard pile. You cannot pick up the discard and discard the same card in the same turn.',
+      'Going out: when a player plays or discards their final card, the hand ends. That player scores 0 penalty points for the round.',
+      'Everyone else counts the value of cards still in their hand: number cards = face value, Ace = 1, Jack/Queen/King = 10. These are penalty points added to their running total.',
+      'Deal the next hand. Play continues until one player hits 100 penalty points. At that moment, the player with the LOWEST total wins.'
     ]
   },
   {
@@ -76,10 +91,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Knocked with 2 deadwood. They had gin right after.',
     description: 'A sleek two-hand rummy. With 3–4 players use the "captains" variant or rotate as dealer. Arrange your hand into melds and knock when your deadwood is 10 or less.',
     howTo: [
-      'Deal 10 cards each; flip one card to start discard.',
-      'Draw and discard; arrange melds privately in hand.',
-      'Knock when deadwood ≤ 10, or call "gin" at zero.',
-      'Opponent may lay off cards onto knocker\'s melds.'
+      'For 2 players: deal 10 cards each. For 3-4 players: deal 7 each and rotate who is the active "declarer" each hand. Flip one card face-up to start the discard pile. The rest is the stock.',
+      'Melds: Sets are 3 or 4 cards of the same rank (e.g., K♠ K♥ K♦). Runs are 3 or more consecutive cards of the same suit (e.g., 3♦ 4♦ 5♦). Aces are low only (A-2-3 is valid; Q-K-A is not).',
+      '"Deadwood" means the cards in your hand that are NOT part of any meld. Add up their point values: Aces = 1, face cards = 10, number cards = face value.',
+      'The non-dealer goes first. On your turn, draw the top card from the stock OR take the top card from the discard pile. Then discard one card face-up.',
+      'Knocking: at any time after drawing, if your total deadwood is 10 points or fewer, you may "knock." Knock by discarding your last card face-down. Then lay out all your melds and your leftover deadwood cards.',
+      'After a knock, your opponent lays out their own melds. They may also lay off their deadwood cards onto your existing melds if those cards fit — reducing their deadwood count.',
+      'Compare deadwood totals. If the knocker\'s deadwood is less, the knocker scores the difference. Example: knocker has 6 deadwood, opponent has 18 after laying off → knocker scores 12.',
+      'Undercut: if after laying off, the opponent\'s deadwood is equal to or LESS than the knocker\'s, the opponent wins instead and scores 25 bonus points plus the difference.',
+      'Gin: if you have ZERO deadwood and no unmatched cards at all, announce "Gin!" instead of knocking. You score 25 bonus points plus the full value of your opponent\'s deadwood. The opponent cannot lay off cards against a Gin hand.',
+      'First player to reach 100 total points wins and earns an extra 100-point bonus. Each player also scores 25 points for every hand they won during the game.'
     ]
   },
   {
@@ -96,10 +117,13 @@ window.GAMES_DATA = [
     notePlaceholder: 'Three eights in a row. Pure chaos.',
     description: 'The ancestor of UNO. Match the top of the discard pile by suit or rank. Eights are wild — play one and declare a new suit. First to empty their hand wins.',
     howTo: [
-      'Deal 5 cards (7 for 2 players); flip one up.',
-      'Play a card matching suit or rank of top card.',
-      'Eights are wild: play one and name a new suit.',
-      'Can\'t play? Draw until you can. First out wins.'
+      'Deal 5 cards to each player (7 cards each if only 2 players). Place the remaining deck face-down as the stock. Flip the top card face-up beside it to start the discard pile. If that first card is an 8, bury it back in the middle of the stock and flip again.',
+      'On your turn, play one card from your hand face-up onto the discard pile. Your card must match EITHER the suit OR the rank of the current top discard. Example: if the top card is 6♥, you may play any heart OR any 6.',
+      'Eights are wild cards. You can play an 8 at any time on any card, regardless of suit or rank. After playing an 8, announce out loud which suit you want the next player to match.',
+      'If you cannot play any legal card from your hand, draw one card from the stock. If that drawn card is playable, you may play it immediately on the same turn. If not, your turn ends.',
+      'If the stock runs out, take the discard pile except the top card, shuffle it, and place it face-down as a new stock.',
+      'You may only play one card per turn (unless a house rule says otherwise). You cannot pass.',
+      'The first player to get rid of all their cards wins the hand. In multi-hand play: the winner scores the total point value of cards still in all opponents\' hands. Eights = 50 points, face cards = 10, Aces = 1, number cards = face value. First player to 200 points wins overall.'
     ]
   },
   {
@@ -116,10 +140,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Asked for sevens four times. Never got one.',
     description: 'A gentle, gossipy matching game. Ask opponents for a rank you hold. If they have it, they hand it over. If not — go fish. Most books of four at the end wins.',
     howTo: [
-      'Deal 5 cards each (7 for 2–3 players).',
-      'Ask a specific player for a specific rank.',
-      'If they have it, collect all; go again. Else, go fish.',
-      'Collect 4 of a kind to make a "book." Most books wins.'
+      'Deal 5 cards to each player (7 cards each if playing with only 2 or 3 players). Place the remaining cards face-down in the middle as the "pond" to fish from.',
+      'Look at your hand privately. If you already hold all four cards of any rank (a complete set of four), place that book face-up in front of you immediately before play begins.',
+      'On your turn, pick any other player and ask them specifically for a rank you already hold at least one of in your hand. Example: "Grandma, do you have any Jacks?" You must already hold at least one Jack to ask for Jacks.',
+      'If the asked player has ANY cards of that rank, they must hand ALL of them to you. You then take another turn immediately and may ask again (any player, any rank you hold).',
+      'If the asked player has none of that rank, they say "Go fish!" You draw the top card from the pond. If the card you draw happens to be the rank you just asked for, show it and take another turn. Otherwise your turn ends.',
+      'Whenever you collect all four cards of any rank (whether by asking or by fishing), immediately lay them face-up as a completed "book" in front of you.',
+      'When any player runs out of cards, they draw 5 new ones from the pond (or all remaining cards if fewer than 5 are left). If the pond is empty and a player has no cards, they are out of the game.',
+      'The game ends when all 13 books have been completed. Count each player\'s books. The player with the most books wins.'
     ]
   },
   {
@@ -136,10 +164,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Scum for two rounds straight. Revenge is coming.',
     description: 'Also called Scum or A**hole. Players race to shed cards; finish order sets next round\'s hierarchy. The President gets tribute from the Scum. Cheerfully ruthless.',
     howTo: [
-      'Deal all cards out evenly.',
-      'Lead any single, pair, triple, or quad. Next must beat it.',
-      'Pass if you can\'t or won\'t play. Twos clear the pile.',
-      'First out = President; last out = Scum. Ranks swap cards.'
+      'Deal all 52 cards out as evenly as possible. Players may have one extra card. Hold your cards privately.',
+      'Card ranking (low to high): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2. Twos are special and beat everything.',
+      'The player with the 3♣ (or 3♦ in some versions) goes first and must lead it. On your turn, play a single card, a pair, three of a kind, or four of a kind — your choice, but you must match the TYPE of the previous play. Example: if someone played a pair, you must beat it with a higher pair.',
+      'To beat the previous play, your cards must be the same type (single/pair/triple/quad) AND of a higher rank. Example: a pair of 8s beats a pair of 7s.',
+      'If you cannot or choose not to beat the current play, say "Pass." You can pass even if you have a legal play. Once everyone passes, the pile is cleared and the last player to play leads anything new.',
+      'Twos are instant clear cards — playing a single 2, a pair of 2s, etc. automatically clears the pile regardless of what was played before, and you lead again.',
+      'The first player to empty their hand becomes the President. The second is Vice President. The player just before last is Vice Scum. The last player out is the Scum.',
+      'For the next round: the Scum must give their two best cards to the President, who gives back any two cards in return. Vice Scum gives one best card to Vice President and receives one card back. Ranks sit in designated seats.',
+      'Play continues for as many rounds as you like. It\'s a social game — enjoy the hierarchy!'
     ]
   },
   {
@@ -156,10 +189,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Called it alone and took all 5. Legend.',
     description: 'A brisk partnership trick-taker played with 9s through Aces. The Jack of the trump suit (the "right bower") is the highest card. Call trump or pass — first to 10 wins.',
     howTo: [
-      'Deal 5 cards each; flip the top card for potential trump.',
-      'Players accept or pass on making that card\'s suit trump.',
-      'Jack of trump = right bower; same-color Jack = left bower.',
-      'Take 3+ tricks to score; "march" all 5 for bonus points.'
+      'Use only cards 9 through Ace (24 cards total — remove 2s through 8s). Sit with your partner across from you. Deal 5 cards to each player in two rounds (2 then 3, or 3 then 2). Flip the top remaining card face-up in the middle — this is the "upcard."',
+      'Trump selection, round 1: starting left of the dealer, each player says "I order it up" (accept the upcard\'s suit as trump) or "Pass." If a player orders it up, the dealer picks up the upcard and discards one card face-down. The ordering player\'s team must win at least 3 tricks or be "euchred."',
+      'If all 4 players pass in round 1, the upcard is turned face-down. Round 2 begins: each player may now name ANY OTHER suit as trump or say "Pass" again. The dealer must name a suit in round 2 if everyone else passes (called "stick the dealer").',
+      'The Jack of the trump suit is called the Right Bower and is the HIGHEST card in the game. The Jack of the OTHER suit of the same color is the Left Bower and is the SECOND highest trump. Example: if hearts are trump, J♥ is Right Bower and J♦ is Left Bower. The Left Bower is trump, not a diamond, for the entire hand.',
+      'Trump card ranking (high to low): Right Bower (J of trump), Left Bower (J of same color), A, K, Q, 10, 9 of trump. Non-trump suits rank normally A through 9.',
+      'The player who ordered or named trump leads the first trick. All players must follow suit if they can. The Left Bower counts as a trump card, not its original suit.',
+      'Highest trump played wins the trick; if no trump, highest card of the led suit wins. Winner of each trick leads the next.',
+      'Scoring: the team that named trump must take at least 3 of the 5 tricks. Taking 3 or 4 tricks = 1 point. Taking all 5 tricks (a "march") = 2 points. If the naming team wins only 1 or 2 tricks, they are "euchred" and the OTHER team scores 2 points.',
+      'Going alone: instead of playing with your partner, you may declare "alone" when naming trump. Your partner sits out. Win all 5 tricks alone = 4 points. Win 3-4 alone = 1 point. First team to 10 points wins.'
     ]
   },
   {
@@ -176,10 +214,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Double pinochle. The table gasped.',
     description: 'A rich bidding and melding game using a special 48-card deck (two of each 9–A). Score points both for melds you declare and tricks you take. A grandparent favorite.',
     howTo: [
-      'Deal 12 cards each (3-hand: 15 each + 3 widow).',
-      'Bid for the right to name trump.',
-      'Declare melds (marriages, runs, pinochle) for points.',
-      'Play tricks; count aces, tens, kings captured.'
+      'Use a Pinochle deck: 48 cards consisting of two copies each of 9, 10, J, Q, K, A in all four suits. For 4 players (partnership): deal 12 cards each. For 3 players: deal 15 each and place 3 face-down as the "widow."',
+      'Bidding: starting left of the dealer, each player bids the number of points they think their team can score from melds plus tricks combined. Minimum bid is usually 250. The highest bidder wins the auction and names the trump suit.',
+      'The winning bidder (4-player game) picks up the 4-card "kitty" (put aside during the deal), adds them to their hand, then discards 4 cards face-down. In 3-player, the winner picks up the 3-card widow.',
+      'Meld scoring (declare face-up before trick play): Run (A-10-J-Q-K of trump) = 150 pts. Royal Marriage (K+Q of trump) = 40. Plain Marriage (K+Q of non-trump) = 20. Pinochle (J♦ + Q♠) = 40. Aces Around (one A of each suit) = 100. Kings Around = 80. Queens Around = 60. Jacks Around = 40. Extra 9 of trump ("Dix") = 10.',
+      'After scoring melds, take your meld cards back into your hand. Play tricks: the winning bidder leads any card. Others must follow suit if they can. If you cannot follow suit, you MUST play trump if you have it. If you have neither, play anything.',
+      'Card ranking within each suit (high to low): A, 10, K, Q, J, 9. Both copies of a card rank equally — ties go to the card played first.',
+      'Trick scoring: each Ace captured = 11 pts, each Ten = 10, each King = 4, each Queen = 3, each Jack = 2, each 9 = 0. The team that wins the LAST trick earns a 10-point bonus.',
+      'Total available points per hand = 250 from tricks + whatever melds were declared. The bidding team must score at least their bid. If they do, they add their full score. If they fall short, their bid is subtracted from their score instead ("going set").',
+      'First partnership to 1,500 points wins. If both teams reach 1,500 on the same hand, the bidding team wins.'
     ]
   },
   {
@@ -196,10 +239,14 @@ window.GAMES_DATA = [
     notePlaceholder: '7-trick march. Silent but deadly.',
     description: 'Elegant, conversation-free trick-taking. No bidding — last card dealt fixes trump. Partnerships race to take the most tricks. 3-player variant uses a "dummy" hand.',
     howTo: [
-      'Deal 13 cards each; flip dealer\'s last card for trump.',
-      'Lead any card; others follow suit if they can.',
-      'Highest of suit led (or highest trump) wins.',
-      'Score 1 per trick over 6. First to 5 (or 7) wins.'
+      'For 4 players: sit with your partner across from you. Deal all 52 cards, 13 each. The very last card dealt to the dealer is turned face-up briefly to reveal the trump suit, then added to the dealer\'s hand. For 3 players: remove one low card to make 51, deal 17 each, and cut for trump instead.',
+      'There is no bidding. Trump is simply whatever suit was revealed on the dealer\'s last card. All four cards of that suit outrank every card of every other suit.',
+      'The player to the dealer\'s left leads any card they choose to start the first trick. Every other player must follow the suit that was led, if they have any cards of that suit.',
+      'If you cannot follow suit, you may play any card — including a trump card. Playing a trump when you can\'t follow suit is called "ruffing."',
+      'The highest trump played wins the trick. If no trump was played, the highest card of the suit led wins. Suits rank A (high), K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2 (low).',
+      'The winner of each trick collects the cards face-down in their pile and leads the next trick.',
+      'Scoring: each partnership counts their tricks. The first 6 tricks each team takes score nothing (called "book"). Each trick taken ABOVE 6 scores 1 point. Example: take 9 tricks → score 3.',
+      'A game is usually 5 or 7 points. The partnership that reaches the target first wins.'
     ]
   },
   {
@@ -216,10 +263,13 @@ window.GAMES_DATA = [
     notePlaceholder: 'Bid 3, took exactly 3. Finally.',
     description: 'Also called Oh Pshaw. Hand size shrinks (or grows) each round. You bid the exact tricks you\'ll take — miss by one and you score nothing. Clever and merciless.',
     howTo: [
-      'Round 1: 1 card each; add 1 per round (or subtract).',
-      'Flip next card for trump; everyone bids in turn.',
-      'Play out all tricks. Make your bid exactly!',
-      'Hit bid = 10 + tricks; miss = 0. High total wins.'
+      'The number of cards dealt changes every round. Round 1: deal 1 card each. Round 2: deal 2 each. Keep increasing by 1 per round up to a maximum (usually the number that lets everyone hold an equal hand), then decrease back down to 1. Total rounds = 2 × max − 1.',
+      'After each deal, flip the next card from the stock to set the trump suit for that round. If a card of the same rank as the dealer\'s last card is flipped, there is no trump that round.',
+      'Bidding: starting left of the dealer, each player in turn announces exactly how many tricks they expect to win that round (from 0 up to the number of cards dealt). The total of all bids does NOT have to equal the number of tricks available — that tension is the heart of the game.',
+      'The player to the dealer\'s left leads any card. Everyone else must follow suit if they can. If you cannot follow suit, play any card.',
+      'Highest trump wins the trick; if no trump, highest card of the suit led wins. Winner leads the next trick.',
+      'Scoring after the round: if you took EXACTLY the number of tricks you bid, score 10 plus your bid. Example: bid 3, take 3 → score 13. If you took more or fewer tricks than your bid, you score 0 for that round regardless.',
+      'Add scores across all rounds. The player with the highest total at the end of all rounds wins.'
     ]
   },
   {
@@ -236,10 +286,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Moved a whole pile onto a king and went out.',
     description: 'A cooperative-feeling layout game. Four foundation piles plus four "corners" for kings. Play descending alternating colors. First to empty their hand wins.',
     howTo: [
-      'Deal 7 each; flip 4 cards as foundation piles (N/S/E/W).',
-      'Draw 1, then make any legal plays: descending, alt color.',
-      'Kings go in the corners; start new diagonal piles on them.',
-      'Move whole piles onto others to free up your hand.'
+      'Deal 7 cards to each player. Place 4 cards face-up in a cross pattern in the center of the table — one on each side (North, South, East, West). These are the four foundation piles. Leave room in each corner for king piles.',
+      'Card colors matter: Red suits (hearts, diamonds) and black suits (spades, clubs) must alternate when building. Cards also build downward — each card played onto a pile must be one rank lower than the current top card and the opposite color.',
+      'On your turn, first draw one card from the face-down stock. Then make as many legal plays as you want from your hand.',
+      'Legal plays: (1) Add a card from your hand to any foundation pile if it is one rank lower and opposite color from the top card. (2) Move an entire foundation pile onto another foundation pile if the bottom card of the moving pile is one rank lower and opposite color than the top of the destination pile.',
+      'Kings are special: a King from your hand goes to one of the four corner positions to start a new "corner pile." Once placed, other cards can be built down onto corner piles using the same alternating-color, descending rule.',
+      'You may not play individual cards onto corner piles directly from your hand — only from other foundation piles. (Some versions allow it; agree before starting.)',
+      'End your turn by discarding one card face-up onto any existing discard spot (or start a new one). You do NOT have to play all possible moves — strategy matters.',
+      'The first player to get rid of all cards from their hand wins.'
     ]
   },
   {
@@ -256,10 +310,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Won every pay card pot. Very lucky night.',
     description: 'A three-phase chip game: ante to pay cards, play poker, then a stops game where sequences win pots. A laughing-around-the-table staple.',
     howTo: [
-      'Set up "pay cards" (A♥ K♣ Q♦ J♠ + 10♥).',
-      'Everyone antes a chip on each pay card.',
-      'Deal cards including a dead hand; play poker hands.',
-      'Stops phase: play in sequence; stops claim pay-card pots.'
+      'Set up the board: place five special "pay cards" face-up in the center — typically A♥, K♣, Q♦, J♠, and 10♥ (or the 7-8-9 of one suit). Before each deal, every player puts one chip on each pay card (5 chips total per player).',
+      'Deal all cards including one extra "dead hand" that no one plays. With 5 players, for example, deal 6 equal hands and set one face-down unused. Players pick up their hands without showing anyone.',
+      'Phase 1 — Poker: each player simultaneously decides to "stay in" and add 2 chips to the pot, or fold and pay 2 chips to the pot. Best poker hand among those who stayed wins the pot.',
+      'Phase 2 — Stops (the main game): the player to the dealer\'s left plays any card face-up and announces its rank and suit. The player who holds the next card in sequence (same suit, one rank higher) plays it. Continue until no one can play.',
+      'A play is "stopped" when the next card in sequence is in the dead hand, already played, or at the top of the suit (Ace). Whoever played the last card before the stop may start a new sequence from any card in their hand.',
+      'Earning chips from pay cards: whenever you play a card that matches one of the 5 pay cards exactly, take ALL chips from that pay card.',
+      'The first player to run out of cards wins. They collect all chips remaining on any pay cards that weren\'t claimed during play.',
+      'Unclaimed pay card chips carry over to the next round — making those pots grow until someone eventually plays that card.'
     ]
   },
   {
@@ -276,10 +334,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Natural canasta on the first hand. Unreal.',
     description: 'The 1950s sensation. Partners build melds of the same rank; seven of a kind is a canasta. Jokers and twos are wild. Freeze the discard pile to thwart your foes.',
     howTo: [
-      'Deal 11 cards each; use two decks + 4 jokers.',
-      'Draw 2, discard 1. Meld 3+ cards of same rank.',
-      'A meld of 7 = canasta: 500 (mixed) or 700 (pure).',
-      'Must have a canasta to "go out." First to 5000 wins.'
+      'Use two standard 52-card decks plus 4 jokers (108 cards total). Sit with your partner across from you. Deal 11 cards to each player. Place the rest face-down as the stock; flip one card face-up to start the discard pile. If the first discard is a wild card or a red 3, keep flipping until a natural card shows.',
+      'Wild cards: all Jokers and all 2s are wild. Red 3s are bonus cards — if dealt one or drawn, immediately place it face-up in front of you and draw a replacement. Red 3s are worth 100 points each at the end.',
+      'On your turn: draw the top 2 cards from the stock (not one — two), OR pick up the entire discard pile (see below). Then meld if you want. End your turn by discarding one card.',
+      'Melding: lay 3 or more cards of the same rank face-up on the table. A meld must contain at least 2 natural cards and may contain no more than 3 wild cards. Aces and 3s cannot be melded normally. You may add cards to your own team\'s existing melds.',
+      'Picking up the discard pile: you may take the entire pile if your top hand card naturally matches the top discard AND you can immediately use that pair to start a new meld or extend an existing one. Frozen pile exception: if a wild card or Black 3 is on top, the pile is "frozen" — you need two natural cards matching the top discard to pick it up.',
+      'Canastas: a meld of exactly 7 cards is a canasta. A "pure" (natural) canasta with no wild cards = 500 points. A "mixed" canasta containing wild cards = 300 points. Wrap the pile with a red card on top (pure) or a black card (mixed) to identify it.',
+      'Going out: to end a hand, a player must discard their last card after melding — but only if their team has completed at least one canasta. You may ask your partner "May I go out?" before doing so; their answer is binding.',
+      'Scoring: add up meld values (Joker = 50, Ace/2 = 20, 8–K = 10, 4–7 = 5, Black 3 = 5) plus canasta bonuses, plus red 3 bonuses. Subtract the value of cards still in hand. Going-out team scores a 100-point bonus. First team to 5,000 points wins.'
     ]
   },
   {
@@ -296,10 +358,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Stuck on Phase 6 for three rounds. Someone nearly quit.',
     description: 'A rummy cousin with a set list of ten increasingly tricky phases. Complete the current phase to advance; if not, you\'re stuck repeating it. First through all ten wins.',
     howTo: [
-      'Deal 10 cards each.',
-      'Try to complete your current phase (e.g., 2 sets of 3).',
-      'Go out by discarding your last card.',
-      'Score penalty pts for cards left; advance phase if made.'
+      'Use a Phase 10 deck (or a standard deck adding wild and skip cards). Deal 10 cards to each player. Place the rest face-down as the stock; flip one card face-up as the discard pile. Each player begins on Phase 1.',
+      'The 10 phases in order: 1) Two sets of 3. 2) One set of 3 + one run of 4. 3) One set of 4 + one run of 4. 4) One run of 7. 5) One run of 8. 6) One run of 9. 7) Two sets of 4. 8) Seven cards of one color. 9) One set of 5 + one set of 2. 10) One set of 5 + one set of 3. A "set" is same rank; a "run" is consecutive numbers.',
+      'On your turn: draw the top card from the stock OR the top card from the discard pile. Then optionally lay down your phase and/or play cards onto others\' completed phases. End your turn by discarding one card.',
+      'Wild cards can substitute for any card in a phase. Skip cards (when discarded) force the next player to lose their turn. You cannot draw a Skip card from the discard pile.',
+      'Laying down your phase: when your hand contains all cards needed for your current phase, lay them face-up on the table in one action. You may only lay down your phase once per hand.',
+      'After you lay down your phase, you may "hit" — add cards from your hand onto your own or another player\'s already-laid-down phase cards on any turn (as long as the cards fit the phase requirements).',
+      'Going out: discard your last card to end the hand. You must have already laid down your phase to go out.',
+      'Scoring: the player who went out scores 0. All others count the value of cards remaining in hand: Wild cards = 25, Skip = 15, number cards 10–12 = 10, number cards 1–9 = 5. These are penalty points.',
+      'Advancing: players who successfully completed their phase advance to the next one. Players who did NOT complete their phase stay on the same phase next hand (and still score penalties).',
+      'The first player to complete Phase 10 and go out wins. If multiple players complete Phase 10 in the same hand, the one with the fewest total penalty points wins.'
     ]
   },
   {
@@ -316,10 +384,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Declared grand and lost by 1 point. Collective groan.',
     description: 'One of the great three-player card games in the world. Aggressive bidding, clever melds with the two-card skat, and a deep trump hierarchy. Rewards mastery.',
     howTo: [
-      'Deal 10 cards each + 2 to the skat (middle).',
-      'Bid for the right to declare the game type.',
-      'Declarer plays alone vs the other two.',
-      'Score 61+ card points to win (declared contract).'
+      'Use a 32-card deck: remove all 2s through 6s from a standard deck, leaving 7, 8, 9, 10, J, Q, K, A in each suit. Deal 10 cards to each of the 3 players and 2 face-down to the center — these 2 center cards are called the "Skat."',
+      'Card values (used in scoring): Ace = 11, Ten = 10, King = 4, Queen = 3, Jack = 2, 9/8/7 = 0. Total card points in the deck = 120.',
+      'Bidding: the goal is to win the right to be the "Declarer" — the one player who plays alone against the other two. Players bid the minimum number of points they guarantee to earn. Typical bids start at 18 (the lowest possible contract value). Each bid must be higher than the last.',
+      'The highest bidder wins and looks at the Skat (the 2 center cards), adds them to their hand (now 12 cards), then discards any 2 face-down. The discarded Skat cards count for the Declarer at the end.',
+      'The Declarer now announces the game type: Suit game (name a trump suit — Jacks still outrank everything, then A, 10, K, Q, 9, 8, 7 of trump), Grand (Jacks only are trump, no other trump suit), or Null (a contract to take ZERO tricks — Jacks have no special power in Null).',
+      'All four Jacks are special in Suit and Grand games. They rank above the Ace: J♣ (highest), J♠, J♥, J♦ (lowest of Jacks), then A, 10, K, Q, 9, 8, 7 within trump. Jacks are always trump regardless of which suit is named.',
+      'The player to the Declarer\'s left leads the first trick. Follow suit if you can; play any card if you can\'t. Highest trump wins; if no trump, highest of the led suit wins.',
+      'Scoring: count the card-point values of all tricks the Declarer won (including the Skat cards they discarded). To win a Suit or Grand game, the Declarer needs 61 or more card points. In Null, they must take exactly 0 tricks.',
+      'If the Declarer succeeds, they score the base game value (suit multiplier × game level). If they fail, the negative value is subtracted from their score instead. Keep a running total across many hands — the highest scorer wins.'
     ]
   },
   {
@@ -336,10 +409,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Buried the wrong cards. Partner was not impressed.',
     description: 'A shifting-partners trick-taker where Queens and Jacks become the top trumps. The "picker" takes the blind and usually plays with a silent partner revealed mid-hand.',
     howTo: [
-      'Deal all cards; leave a 2-card "blind."',
-      'First to pick takes the blind, buries 2, chooses partner.',
-      'Q♣ is highest; all Queens, Jacks, diamonds are trump.',
-      'Picker\'s team needs 61+ card points to win.'
+      'Use a 32-card deck (remove 2s–6s). For 5 players, deal 6 cards to each player and 2 face-down in the center as the "blind." For 3 players, deal 10 each with a 2-card blind.',
+      'Trump hierarchy (all trump, high to low): Q♣, Q♠, Q♥, Q♦, J♣, J♠, J♥, J♦, then A, 10, K, 9, 8, 7 of diamonds. All diamonds are trump. All Queens and Jacks are trump regardless of their original suit.',
+      'Going around the table, each player decides to "pick" (take the blind) or "pass." The first player who picks becomes the Picker.',
+      'The Picker takes both blind cards, looks at them secretly, and buries (discards face-down) any 2 cards from their 8-card hand. Those buried cards count for the Picker at end of hand.',
+      'The Picker must choose a partner by naming a specific ace they do not hold (e.g., "I have the Ace of hearts" means the holder of A♥ is your secret partner). Partners are not revealed until that card is played. In some games with 3 players, the Picker plays alone against both others.',
+      'Non-trump suits rank normally (A, 10, K, 9, 8, 7) but remember all diamonds and all Queens/Jacks have moved to the trump category.',
+      'The player to the dealer\'s left leads the first trick. You must follow suit if you can. If the lead suit is diamonds, you must play a trump. If you cannot follow suit, play any card.',
+      'Highest trump wins a trick containing trump; if no trump, highest card of the led suit wins. Winner leads the next trick.',
+      'Scoring: card point values are A = 11, Ten = 10, K = 4, Q = 3, J = 2, others = 0. Total = 120 points. The Picker\'s team (Picker + secret partner) must take 61 or more card points to win. If they take 90+, it\'s a schneller (double win). If they take all 120, triple win.',
+      'If the Picker\'s team wins, each of the three opposing players pays one chip to each member of the winning team. If the Picker\'s team loses (under 61), they each pay one chip to each of the three opponents. Adjust payouts for schneller and solo (playing without a partner).'
     ]
   },
   {
@@ -356,10 +435,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Knocked the whole pile over. Counted it anyway.',
     description: 'Chaotic, hilarious, physical. Pass cards rapidly. The moment someone gets four of a kind, they grab a spoon — everyone else dives for the rest. One short.',
     howTo: [
-      'Place (players − 1) spoons in the center.',
-      'Deal 4 cards each. Pass one card left, constantly.',
-      'On 4-of-a-kind, quietly take a spoon. Others pounce.',
-      'Left without a spoon? That\'s a letter in S-P-O-O-N.'
+      'Gather real spoons (or safe substitutes like pencils). Place one fewer spoon than the number of players in the center of the table — if 5 people are playing, put out 4 spoons.',
+      'From the deck, pull out sets of 4-of-a-kind equal to the number of players. Example: 5 players → use 5 different sets (e.g., all four 3s, all four 7s, etc.). Shuffle those 20 cards and deal 4 to each player.',
+      'Play begins simultaneously — there are no turns. The dealer picks up one card from the remaining draw pile, decides whether to keep it (and discard a different card from their hand), and passes a card face-down to the left. Every player simultaneously receives a card from the right and passes one to the left.',
+      'You always hold exactly 4 cards. The goal is to get four of a kind (all four cards of the same rank) in your hand.',
+      'The moment ANY player has four of a kind, they silently and subtly reach out and take a spoon from the center — as sneakily as possible.',
+      'Once someone takes a spoon, everyone else must grab one as fast as they can. One player will be too slow — there aren\'t enough spoons for everyone.',
+      'The player who fails to grab a spoon earns a letter: first miss = S, second = SP, third = SPO, fourth = SPOO, fifth = SPOON. Spell SPOON and you\'re eliminated.',
+      'Remove one spoon and one 4-of-a-kind set from the deck. Keep playing with the remaining players until only one person is left — they win!'
     ]
   },
   {
@@ -376,10 +459,13 @@ window.GAMES_DATA = [
     notePlaceholder: 'Slapped the wrong card. Sore hand. Worth it.',
     description: 'Deal cards one at a time to a center pile. When a Jack appears, the first hand to slap it wins the pile. Fast, giggly, great for mixed ages.',
     howTo: [
-      'Deal all cards face down to players.',
-      'In turn, flip one card face up onto the center pile.',
-      'When a Jack lands, first to slap it takes the pile.',
-      'Out of cards? Out of the game. Last player wins.'
+      'Shuffle the full deck and deal all 52 cards face-down as evenly as possible. Players do NOT look at their cards — keep them in a face-down pile in front of you.',
+      'Starting with the player to the dealer\'s left, players take turns flipping ONE card face-up from the top of their pile onto a single shared pile in the center of the table.',
+      'The moment a Jack (J) lands on the center pile, every player races to slap their hand down on top of it. The FIRST player whose hand lands on the pile wins all the cards in it.',
+      'The winner shuffles those captured cards into the bottom of their own face-down pile.',
+      'False slap rule: if you slap the pile when the top card is NOT a Jack, you must give one card from your pile face-down to the player who most recently played a card.',
+      'If a player runs out of cards in their pile, they get one more chance: they stay in the game and may still slap the next Jack that appears. If they slap successfully, they\'re back in. If not, they\'re eliminated.',
+      'The last player with cards remaining wins. The game naturally ends when all cards have been won by one player.'
     ]
   },
   {
@@ -396,10 +482,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Touched nose so slowly no one noticed for a full minute.',
     description: 'Pass cards simultaneously around the table trying to collect four of a kind. When you get it, stealthily touch your nose. Everyone else must follow. Last one: P-I-G.',
     howTo: [
-      'Use one set of 4-of-a-kind per player (mix & deal 4 each).',
-      'Everyone passes one card left at the same time.',
-      'On 4-of-a-kind, casually touch your nose.',
-      'Last to catch on earns a letter. Spell PIG and you\'re out.'
+      'From the deck, select one complete 4-of-a-kind group for each player. Example: 4 players → pull out all four 2s, all four 5s, all four 8s, and all four Ks. Shuffle only those cards (4 × number of players) and deal exactly 4 to each player.',
+      'Players look at their 4 cards privately. The goal is to collect all four cards of the same rank — any rank, whichever you end up with.',
+      'All players simultaneously choose one card from their hand and place it face-down in front of them to pass to the left. When everyone has a card ready, all say "Pass!" and slide their card to the left at the same time.',
+      'Pick up the card passed to you, add it to your hand, decide which card to pass next, and repeat immediately — there are no formal turns. The passing is rapid and continuous.',
+      'The moment any player collects all four of a kind, they must casually and quietly touch their nose with one finger — without announcing it or making it obvious. Continue passing cards as if nothing happened.',
+      'As soon as you notice someone else touching their nose (or if you think someone has), you must also touch your nose — even mid-pass.',
+      'The LAST player to touch their nose earns a letter: P first, then I, then G. Any player who touches their nose when no one has four of a kind yet also earns a letter.',
+      'A player who spells P-I-G is eliminated. Remove their 4-of-a-kind group from the deck, reduce the number of cards, and keep playing. The last player standing wins.'
     ]
   },
   {
@@ -416,10 +506,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Called cheat six times. Right twice. Pile was enormous.',
     description: 'A game of poker-faced fibbing. Play cards face down and declare their rank — truthfully or not. Anyone can call "cheat!" Loser takes the whole pile.',
     howTo: [
-      'Deal all cards out evenly.',
-      'Play 1–4 face-down cards and declare a rank (in order A, 2, 3…).',
-      'Anyone may call "cheat!" Flip the claimed cards.',
-      'Liar (or wrong challenger) takes the pile. First empty wins.'
+      'Deal all 52 cards as evenly as possible. Some players may have one extra card — that\'s fine. Players hold their cards privately and fan them to see what they have.',
+      'The required rank to declare goes in order: the first player must declare Aces, the second player declares 2s, the third declares 3s, and so on cycling through A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, then back to A.',
+      'On your turn, place 1, 2, 3, or 4 cards face-DOWN on the discard pile and announce how many you\'re playing and what they are. Example: "Two Aces." The cards may or may not actually be Aces — you choose whether to tell the truth.',
+      'After you place cards, any other player may immediately challenge by calling "Cheat!" (or "B.S.!"). Only one challenge per play — whoever says it first is the challenger.',
+      'If challenged: flip over the cards just played. If the cards match what was declared, the challenger was WRONG — they must take the entire discard pile into their hand. If the cards do NOT match what was declared, you were caught lying — you take the entire discard pile.',
+      'If nobody challenges, play moves to the next player who must declare the next rank in sequence. The discarded cards stay face-down.',
+      'Strategy: you must always play the required rank, so sometimes you\'ll need to bluff. Watch how many cards others play and think about what\'s left in the deck.',
+      'The first player to play their very last card and NOT get caught wins. If you play your last card and someone challenges successfully, you take the pile back. If the challenge fails, you win.'
     ]
   },
   {
@@ -436,10 +530,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Cards flying everywhere. Nerts called in under 2 minutes.',
     description: 'Also called Pounce. Every player has their own deck and plays solitaire simultaneously onto shared center foundations. Speed matters. Yell "Nerts!" when your pile empties.',
     howTo: [
-      'Each player uses their own deck (different backs).',
-      'Deal a 13-card "Nerts" pile + 4 work piles.',
-      'All play at once onto shared Ace foundations in the middle.',
-      'Empty your Nerts pile and yell "Nerts!" to end the round.'
+      'Each player needs their own standard 52-card deck with a distinct back design — so you can tell whose cards are whose at the end. Shuffle your own deck.',
+      'Each player deals their own layout: place 13 cards face-down in a pile to your upper-left — this is your "Nerts pile" (also called the Pounce pile). Flip the top card face-up. Then deal 4 cards face-up in a row to your right — these are your 4 work piles. The remaining cards in your hand are your stock; you\'ll flip them 3 at a time.',
+      'Shared foundation piles go in the center of the table. These build from Ace upward in suit (A, 2, 3 … up to K) and ANYONE can play onto them. When an Ace becomes available, place it in the center to start a new foundation.',
+      'When someone says "Go!" all players play simultaneously — there are NO turns. Move as fast as you can.',
+      'Legal moves: (1) Move a card from your Nerts pile top, work pile, or stock onto a center foundation if it\'s the correct next card in sequence for that suit. (2) Build on your own work piles in descending order, alternating red and black (like solitaire). (3) Move entire sequences within your own work piles. (4) When a work pile slot empties, fill it from your Nerts pile.',
+      'Flipping your stock: go through your stock cards 3 at a time, flipping them face-up. Only the top card of the flipped group is available to play. When you exhaust the stock, flip the used pile over and go through again.',
+      'Calling "Nerts!": the moment your Nerts pile is completely empty, shout "Nerts!" — the round ends immediately for everyone.',
+      'Scoring: count how many of YOUR cards made it into the center foundations — score 1 point each. Then subtract 2 points for every card still in your Nerts pile. Highest score wins the round. Play multiple rounds; first to 100 total points wins.'
     ]
   },
   {
@@ -456,10 +554,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Knocked with 28. Lost immediately. Told no one.',
     description: 'Also called Scat or Blitz. Build the best 3-card hand in one suit (face cards = 10, Ace = 11). Knock when you think you\'re safe. Lowest hand loses a life.',
     howTo: [
-      'Deal 3 cards each; start 3 face up in the middle.',
-      'On your turn, swap 1 or all 3 with the middle.',
-      'Knock instead of drawing when you like your hand.',
-      'After knock, one round more; lowest loses a life.'
+      'Give each player 3 tokens (coins, chips, or matches) representing their 3 lives. Deal 3 cards to each player. Place 3 additional cards face-up in the center of the table — this is the "pool." Put the remaining deck aside face-down (it is not used).',
+      'Card values: Ace = 11 points, face cards (J, Q, K) = 10, number cards = face value. The goal is to have the highest point total — but only cards of the SAME suit count. A hand of K♥ 7♥ 3♦ is worth only 10+7 = 17 (only the hearts), not 20.',
+      'A special hand: three of a kind (three cards of the same rank) automatically counts as 30.5 points, which beats everything except 31.',
+      'On your turn, you may either: (A) swap exactly 1 card from your hand with any 1 card from the pool, or (B) swap your entire 3-card hand for all 3 pool cards at once, or (C) "knock" — tap the table instead of swapping to signal the final round.',
+      'Knocking: when you knock, every OTHER player gets exactly one more turn to swap or knock before all hands are revealed. You yourself do not get another turn after knocking.',
+      'Once the round after the knock is complete, all players reveal their hands. The player with the lowest hand total loses one life (token).',
+      'Ties: if two or more players are tied for lowest, ALL tied players lose a life.',
+      'Instant win — 31: if you ever have exactly 31 points in one suit (A + face card + 10, for example), reveal it immediately. Every other player loses a life at once.',
+      'After losing all 3 lives, a player is eliminated. The last player with at least one life remaining wins.'
     ]
   },
   {
@@ -476,10 +579,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Swept the table three times in one hand. Scopa!',
     description: 'A beautiful capture game played with a 40-card Italian deck (or A–7, J, Q, K from a standard deck). Sweep the table with a single matching card and shout "Scopa!"',
     howTo: [
-      'Deal 3 cards each; lay 4 face up on the table.',
-      'Play a card; capture a table card of equal value (or sum).',
-      'Clearing the whole table in one play = scopa (bonus pt).',
-      'Score for most cards, most coins, 7 of coins, primiera.'
+      'Use a 40-card Italian deck if you have one, or from a standard deck remove the 8s, 9s, and 10s to get 40 cards (A–7, J, Q, K). Deal 3 cards to each player. Place 4 cards face-up in the center of the table as the "table." Deal the rest in batches of 3 when hands run out.',
+      'Card values in Scopa: Ace = 1, 2-7 = face value, Jack = 8, Queen = 9, King = 10.',
+      'On your turn, play exactly one card from your hand face-up. You may use it to CAPTURE table cards that match or combine to your card\'s value. Examples: a 6 captures a single 6, OR captures a 4+2, OR captures a 1+2+3. You choose which capture you want.',
+      'If you cannot make a capture (no table card or combination matches your card\'s value), your card is placed face-up on the table and adds to it.',
+      'Scopa! If your capture removes ALL remaining cards from the table at once, that is a "scopa" — immediately place your capturing card face-up sideways in your score pile as a marker. Each scopa = 1 bonus point.',
+      'Exception: if the very last card of a deal clears the table, it does NOT count as a scopa.',
+      'When all players are out of cards, deal the next round of 3 cards each from the stock. Repeat until the deck is exhausted. Any cards left on the table at the very end go to the last player who made a capture.',
+      'Scoring at end of game: 1 point for most total cards captured, 1 point for most "coins" suit cards captured, 1 point for holding the 7 of coins (Settebello), 1 point for best "primiera" (the player with the best combination of one 7-value card from each of the four suits — 7s score best, then 6s, then Aces, etc.), plus 1 point per scopa earned. First to 11 points wins.'
     ]
   },
   {
@@ -496,10 +603,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Three column pairs. Finished at 12. Par for Grandma.',
     description: 'Each player has a 2×3 grid of face-down cards. Swap with draws and discards to lower your hand. Matching pairs in a column cancel to zero. Low total wins.',
     howTo: [
-      'Deal 6 cards face down in a 2×3 grid per player.',
-      'Flip any 2 to start. Draw from stock or discard.',
-      'Swap with a grid card or flip a face-down one.',
-      'Pairs in a column = 0. Lowest over 9 rounds wins.'
+      'Deal 6 cards to each player face-down, arranged in a 2-row by 3-column grid. Players may NOT look at their cards yet. Place the remaining deck face-down as stock; flip the top card face-up to start the discard pile.',
+      'To start: each player flips any 2 of their 6 grid cards face-up, leaving 4 still face-down. This is the only time you peek without drawing.',
+      'Card values: 2s = −2, Aces = 1, number cards 3–10 = face value, Jacks and Queens = 10, Kings = 0. The goal is to end with the LOWEST total value.',
+      'On your turn: draw the top card from either the stock (face-down, unknown) or the discard pile (face-up, known). You now decide: swap it with any of your 6 grid cards (placing the replaced card face-up on the discard pile), OR discard it immediately.',
+      'If you swap with a face-down card, the replaced card goes face-up to the discard pile. The new card in your grid is face-up.',
+      'Column bonus: if both cards in any vertical column of your grid are the same rank, that entire column is worth ZERO points — regardless of the card values. Even face cards cancel out.',
+      'End of a round is triggered when any player flips their last face-down card (all 6 cards in their grid are face-up). All other players get one final turn each, then everyone counts up.',
+      'Add the values of all 6 grid cards (remember: matching column pairs = 0). Record each player\'s score for that round.',
+      'Play 9 rounds total. The player with the LOWEST cumulative score after all 9 rounds wins. If scores are tied, the tied players play one more sudden-death round.'
     ]
   },
   {
@@ -516,10 +628,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Held the Old Maid for three rounds. Everyone knew.',
     description: 'Remove three Queens, leaving one as the Old Maid. Deal all cards, discard any pairs, then take turns drawing from a neighbor\'s hand. Whoever ends up with the unmatched Queen loses.',
     howTo: [
-      'Remove 3 Queens from the deck — the lone remaining Queen is the Old Maid.',
-      'Deal all cards; players immediately discard any pairs from their hand.',
-      'Take turns drawing one card at random from the player to your left.',
-      'Discard new pairs as you form them. Holder of the lone Queen at the end loses.'
+      'Prepare the deck: remove exactly 3 Queens, leaving only 1 Queen remaining in the 49-card deck. That lone Queen is the "Old Maid."',
+      'Shuffle and deal all 49 cards as evenly as possible. Some players will have one extra card — that is fine.',
+      'Everyone looks at their hand privately. Immediately discard any PAIRS (two cards of the same rank) face-down into a discard pile. If you have three of a kind, discard two and keep one. If you have four of a kind, discard all four.',
+      'Play begins with the player to the dealer\'s left. They fan their cards face-DOWN toward the player to their right, hiding what they hold. That player draws one card at random — blindly, without seeing what it is.',
+      'If the drawn card forms a pair with a card already in the drawer\'s hand, discard that pair immediately. If not, keep the new card.',
+      'Play continues clockwise — each player fans their cards toward the player to their right, who draws one blind card, checks for a pair to discard, and so on.',
+      'As players empty their hands completely, they are SAFE and out of the round (not eliminated — they just stop playing and wait).',
+      'The round ends when only one player remains holding a card — and that card will always be the lone Queen (Old Maid). That player LOSES the round and earns a point (or a mark against them).',
+      'Play several rounds. The player who ends up holding the Old Maid the fewest times wins overall.'
     ]
   },
   {
@@ -536,10 +653,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Bid four aces with two in hand. Got away with it.',
     description: 'Each player holds cards face-down. Players bid on how many cards of a given rank exist across all hands combined — like Liar\'s Dice but with cards. Raise the bid or call the bluff. Wrong side loses a life.',
     howTo: [
-      'Deal 3 cards each, kept face-down. Players may peek at their own.',
-      'First player bids a count and rank (e.g., "three sevens").',
-      'Each player must raise: higher count of same rank, or any count of higher rank.',
-      "Call 'liar!' to challenge. Reveal all cards — if bid is wrong, bidder loses a life; if right, challenger does."
+      'Give each player 3 tokens (lives). Deal 3 cards face-down to each player. Players may peek at their own cards in secret at any time, but must never show them to others.',
+      'The goal is to survive by making accurate bids — or convincing bluffs — about how many cards of a given rank exist across ALL hands combined (including the cards you cannot see).',
+      'Rank order (low to high): 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A.',
+      'The starting player makes a bid: a NUMBER and a RANK. Example: "Two sixes" means they claim at least two 6s exist in total across all players\' hands. The bid must be at least "one [any rank]."',
+      'Going clockwise, each player must either RAISE the bid or CALL the bluff. Raising means either: a higher count of the same rank ("three sixes"), OR any count of a strictly higher rank ("two sevens" or "one ace").',
+      'You may never lower the count AND lower the rank at the same time. You can go from "three sixes" to "two kings" (same count, higher rank) or "four fives" (higher count, lower rank is NOT allowed).',
+      'Calling the bluff: instead of raising, any player may say "Liar!" All cards are flipped face-up and counted.',
+      'If the total count of that rank across all hands is LESS THAN what was bid, the bidder was lying — they lose one life.',
+      'If the total count is EQUAL TO OR MORE THAN the bid, the challenger was wrong — they lose one life.',
+      'After each challenge, deal fresh cards and start a new round. The player with the fewest lives remaining when someone is eliminated wins — or last player with lives wins.'
     ]
   },
   {
@@ -556,10 +679,13 @@ window.GAMES_DATA = [
     notePlaceholder: 'Three-way war on the very last card. Unbelievable.',
     description: 'Pure luck, pure drama. Split the deck and flip simultaneously. High card takes the pile. Ties go to war — three face-down cards and one face-up. Most cards at the end wins.',
     howTo: [
-      'Split the deck evenly between all players.',
-      'Everyone flips one card face-up at the same time.',
-      'Highest card wins all flipped cards and adds them to the bottom of their pile.',
-      'Tie = war: place 3 face-down, flip 1 up. Highest of those wins everything.'
+      'Shuffle and deal the entire 52-card deck as evenly as possible, face-down. Each player holds their pile face-down and does NOT look at any cards.',
+      'Card ranking (high to low): A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2.',
+      'Each player simultaneously flips the top card of their pile face-up into the center. The player who flipped the highest-ranked card wins ALL flipped cards and adds them to the bottom of their pile.',
+      'War — when there is a tie for highest card: each tied player places 3 cards face-DOWN from their pile onto the pile, then flips one more card face-UP. The highest of those new face-up cards wins the entire pile (all the war cards plus the original tied cards).',
+      'If there is ANOTHER tie during the war, repeat the process: three more face-down, one more face-up, until someone wins.',
+      'If a player does not have enough cards to complete a war (needs 4 cards but has fewer), they play out all remaining cards face-down and their last card face-up. If they still lose, they are eliminated.',
+      'The game continues until one player has won all 52 cards — that player wins. (Note: War can last a very long time! Feel free to set a time limit and count cards at the end.)'
     ]
   },
   {
@@ -576,10 +702,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'False snap cost the whole pile. Absolutely worth it.',
     description: 'Deal cards face down. Players take turns flipping one card onto their own pile. When any two top piles match in rank, first to shout "Snap!" wins both piles. False snaps are punished. Last player with cards wins.',
     howTo: [
-      'Deal all cards face down; no peeking.',
-      'Take turns flipping one card face-up onto your own personal pile.',
-      'When two top piles match in rank, shout "Snap!" and take both piles.',
-      'False snap? Give one card to each other player. Last player with cards wins.'
+      'Shuffle and deal all 52 cards face-down as evenly as possible. Each player holds their pile face-down in their hand. Do not look at any cards.',
+      'Starting with the player to the dealer\'s left, players take turns. On your turn, take the top card from your face-down pile and flip it face-up to form your personal face-up pile in front of you. Your face-up pile stays visible to everyone.',
+      'After you flip, check: does the rank of your newly-flipped card match the TOP card showing on any OTHER player\'s face-up pile? If two or more piles show the same rank on top, it\'s a Snap!',
+      'Anyone — on any player\'s turn, not just their own — may shout "Snap!" and slap their hand on the two matching piles. The first person to slap takes BOTH piles and adds them to the bottom of their face-down pile.',
+      'False Snap: if someone shouts "Snap!" and the top cards do NOT match, that player must give one card from their face-down pile to each other player as a penalty.',
+      'Running out of face-down cards: if your face-down pile is empty but you still have a face-up pile, flip your face-up pile over to create a new face-down pile and continue.',
+      'Elimination: a player is eliminated when they have no cards at all — both piles empty — AND they have missed their chance on the current snap.',
+      'The last player with cards wins. If two players are left and one is snapped out, the remaining player wins immediately.'
     ]
   },
   {
@@ -596,10 +726,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Pegged out on a 29-point hand. Once in a lifetime.',
     description: 'One of England\'s oldest card games. Discard to the crib, play cards toward 31, then score combinations in your hand. Fifteens, pairs, runs, and flushes all score. First to peg 121 wins.',
     howTo: [
-      'Deal 6 cards each; discard 2 to the shared "crib" (dealer scores it later).',
-      'Play cards alternately, announcing running total; score for hitting 15 or 31.',
-      'Score your hand: 2 pts per fifteen-combination, pairs, runs, and flushes.',
-      'Peg points on the board as you score. First to 121 wins.'
+      'You need a cribbage board (or paper) to track scores up to 121. Deal 6 cards to each player. Each player privately chooses 2 cards to discard face-down to form the "crib" — a bonus hand scored by the dealer at the end of the round.',
+      'Cut the remaining deck; the top card becomes the "starter" (or "turn-up") card. If it\'s a Jack, the dealer immediately pegs 2 points ("His heels").',
+      'The Pegging phase: the non-dealer plays a card face-up and announces its value. The dealer plays a card and announces the running total. Players alternate, adding to the running total and scoring as follows: reaching exactly 15 = 2 pts; reaching exactly 31 = 2 pts; coming closest to 31 without going over (Go) = 1 pt; pairs, triples, quads in sequence = 2/6/12 pts; runs of 3 or more in any order = 1 pt per card in the run.',
+      'Card values for pegging and hand scoring: Ace = 1, numbered cards 2–10 = face value, Jack/Queen/King = 10.',
+      'After pegging, each player scores their own hand (4 cards + the shared starter card = 5 cards to combine). Count these combinations and score them: 2 points for every pair of cards that sum to 15 (e.g., 6+9, 5+10, A+4+K), 2 pts per pair (same rank), 1 pt per card in any run of 3+, 4 pts for a flush (all 4 hand cards same suit; 5 pts if starter matches too), 1 pt for holding the Jack of the starter\'s suit ("His Nobs").',
+      'The non-dealer scores their hand first, then the dealer scores their hand, then the dealer scores the crib (the 4 discarded cards + the starter) using the same scoring rules.',
+      'After scoring all three hands, the deal passes left. Peg your scores as you earn them — the pegging happens live during play.',
+      'First player or team to reach 121 points on the cribbage board wins. You can win mid-hand if you peg out during the play phase — you don\'t have to wait for hand scoring.'
     ]
   },
   {
@@ -616,10 +750,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Dealer busted four hands in a row. The house lost everything.',
     description: 'Get closer to 21 than the dealer without busting. Face cards are 10, Aces are 1 or 11. Hit, stand, or double down. Simple to learn, rewarding to play well.',
     howTo: [
-      'One player deals; others place bets before cards are dealt.',
-      'Each player and the dealer get 2 cards; dealer shows one face-up.',
-      'Hit (take a card) or stand. Go over 21 and you bust — you lose.',
-      'Dealer must hit on 16 or under, stand on 17+. Beat dealer without busting to win.'
+      'One player is the dealer. All other players are betting against the dealer. Before any cards are dealt, each player places a bet.',
+      'Card values: numbered cards 2–10 = face value. Jack, Queen, King = 10. Ace = 11 OR 1 — you choose whichever helps your hand more (an Ace becomes 1 automatically if holding 11 would bust you).',
+      'Deal two cards to each player and two to the dealer. All player cards are face-up. The dealer shows one card face-up (the "upcard") and keeps one face-down (the "hole card").',
+      'Blackjack: if any player (or the dealer) has an Ace plus any 10-value card as their first two cards, that is a Blackjack. A player Blackjack pays out 3:2 immediately — unless the dealer also has Blackjack, in which case it\'s a push (tie) and the bet is returned.',
+      'Players act in turn. Your options: Hit (take another card — you can hit as many times as you like); Stand (take no more cards, you\'re done); Double Down (double your bet and take exactly one more card, then stand); Split (if your two cards are the same value, split them into two separate hands, match your bet on the second hand, and play both hands individually).',
+      'Bust: if your card total exceeds 21, you bust and lose your bet immediately — regardless of what the dealer does.',
+      'After all players have acted, the dealer reveals their hole card. The dealer MUST hit on any total of 16 or less. The dealer MUST stand on any total of 17 or more (in some home games, the dealer hits "soft 17" — an Ace+6 — agree before starting).',
+      'If the dealer busts, all players still in the hand win and collect 1:1 on their bet. If the dealer does not bust, any player with a higher total than the dealer wins 1:1. Ties are a push. Any player lower than the dealer loses their bet.'
     ]
   },
   {
@@ -636,10 +774,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Blind-picked a 2 on the last face-down card. Saved.',
     description: 'Also called Karma or Shed. Play equal or higher cards onto the pile to shed your hand, then face-up palace cards, then blind face-down ones. Special cards shake things up: 2 resets, 10 burns the pile. Last to clear loses.',
     howTo: [
-      'Deal 3 face-down, 3 face-up on top of those, and 3 in hand per player.',
-      'Play a card equal or higher than the top of the discard pile; pick up the pile if you can\'t.',
-      'Clear your hand first, then play face-up cards, then flip face-down ones blind.',
-      '2 resets to any value; 10 burns the entire pile. Last player to clear their cards loses.'
+      'Set up each player\'s "palace": deal 3 cards face-DOWN to each player, then deal 3 more face-UP on top of those face-down cards, and finally 3 cards into each player\'s hand. Players look at their hand cards but must NOT look at their face-down cards.',
+      'Before play begins, each player may swap any cards from their hand with any of their face-up palace cards to improve their face-up selection. Once play starts, no more swapping.',
+      'The player with the lowest card leads it to start the discard pile. On your turn, play one or more cards of equal or higher rank than the current top of the discard pile. You may play multiple cards of the SAME rank at once.',
+      'Special cards: 2 resets the pile value back to "anything can be played on it." 10 burns the entire pile — remove it from the game and you get to lead again from scratch. 7 means the NEXT player must play a card of 7 or lower (reverses the "higher" rule for one turn only). 4 of a kind played consecutively on the pile also burns the pile.',
+      'If you cannot (or choose not to) play a card, you must pick up the entire discard pile into your hand. Your turn ends.',
+      'The phases of play: First, play from your hand until it\'s empty. Then play from your face-up palace cards. Finally, flip and play face-down cards one at a time — you cannot peek before playing. If a flipped face-down card cannot be played, pick up the pile along with the flipped card.',
+      'After playing from your hand, always refill your hand to 3 cards from the stock (during the hand phase). Once the stock is gone, you don\'t refill.',
+      'The LAST player to clear all three piles (hand, face-up, face-down) loses — they are the "palace." Everyone else wins. Play as many rounds as you like.'
     ]
   },
   {
@@ -656,10 +798,13 @@ window.GAMES_DATA = [
     notePlaceholder: 'Grandma remembered the 7 of clubs from twelve turns ago.',
     description: 'Also called Memory or Pairs. Lay all cards face down in a grid. Flip two — if they match in rank, keep them and go again. If not, flip them back over and remember where they were. Most pairs wins.',
     howTo: [
-      'Lay all 52 cards face down in a 4×13 grid.',
-      'Take turns flipping two cards face-up.',
-      'Matching rank? Keep the pair and take another turn.',
-      'No match? Flip them back face-down. Player with most pairs at the end wins.'
+      'Shuffle all 52 cards and lay them face-down in a 4-row by 13-column grid on the table. Arrange them neatly so each card position is distinct and easy to reference.',
+      'Players take turns. On your turn, flip any ONE card face-up in place so all players can see it. Then flip a SECOND card face-up.',
+      'If the two cards match in rank (e.g., both are 7s, or both are Queens — suit does not matter), you keep the pair! Take both cards, set them aside in your score pile, and take another full turn immediately.',
+      'If the two cards do NOT match in rank, flip both back face-down in their original positions. Everyone must try to remember where they were.',
+      'The game relies entirely on memory — pay attention to every card that gets flipped, even on other players\' turns, so you can use that information later.',
+      'Play continues until all 26 pairs have been found and the grid is empty.',
+      'Count each player\'s pairs. The player with the most pairs wins. In case of a tie, the tied players share the win (or play a sudden-death flip to break it).'
     ]
   },
   {
@@ -676,10 +821,13 @@ window.GAMES_DATA = [
     notePlaceholder: 'Drew to an inside straight. It actually came in.',
     description: 'The original poker. Bet on your initial hand, then discard up to three cards and draw replacements to improve it. A second betting round, then showdown. Best five-card hand wins the pot.',
     howTo: [
-      'Ante up, then deal 5 cards face-down to each player.',
-      'First betting round: call, raise, or fold.',
-      'Discard and draw up to 3 replacement cards (4 if you hold an Ace).',
-      'Second betting round, then showdown. Best poker hand wins.'
+      'Designate a dealer. All players ante — put a small equal bet into the pot before any cards are dealt. Deal 5 cards face-down to each player. Players look at their hand privately.',
+      'Poker hand rankings (best to worst): Royal Flush (A-K-Q-J-10 same suit), Straight Flush (5 consecutive same suit), Four of a Kind, Full House (3 of one rank + 2 of another), Flush (5 same suit), Straight (5 consecutive, any suits), Three of a Kind, Two Pair, One Pair, High Card.',
+      'First betting round: starting left of the dealer, each player must either call (match the current bet), raise (increase the bet — all others must call the raise or fold), or fold (discard their hand face-down and forfeit the pot). There is usually a maximum of 3 raises per round.',
+      'The Draw: after the first betting round, starting left of the dealer, each player may discard 0 to 3 cards from their hand face-down and receive the same number of replacement cards from the dealer. If you hold an Ace (and reveal it), you may draw up to 4 cards. You may also choose to draw 0 (stand pat) — a strong signal.',
+      'Second betting round: another round of betting in the same format — call, raise, or fold. Players still in the hand bet based on their improved (or unchanged) hand.',
+      'Showdown: if two or more players remain after the second betting round, all reveal their hands simultaneously. The best 5-card poker hand wins the entire pot.',
+      'Ties: if two players have the same hand type, compare the highest-ranking cards within the hand. Example: both have a pair — the higher pair wins. Both have the same pair — compare the next highest card (the kicker). If completely tied, split the pot equally.'
     ]
   },
   {
@@ -696,10 +844,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Sat on the 8 of hearts for four rounds. Pure evil.',
     description: 'Also called Fan Tan or Parliament. All four sevens anchor the center; players extend each suit up toward King and down toward Ace. Hold key cards to block opponents. Last to empty their hand loses.',
     howTo: [
-      'Deal all cards evenly (some players may get one extra).',
-      'Player with 7♦ plays it first; others may play any seven or extend an existing sequence.',
-      'Build each suit up to King or down to Ace beside its seven.',
-      'Can\'t play? Pass and take a penalty chip. First to empty hand wins.'
+      'Shuffle and deal all 52 cards as evenly as possible. Some players may hold one extra card — that is fine. Keep your cards private.',
+      'The layout: as 7s are played, they anchor the center of the table — one per suit. Cards then extend in a line from each 7 — 8, 9, 10, J, Q, K going right (up toward King) and 6, 5, 4, 3, 2, A going left (down toward Ace).',
+      'The player holding the 7♦ MUST play it to begin. (If no one has it, the player with 7♥ starts, then 7♣, then 7♠.)',
+      'On your turn you may play ONE card. Legal plays: (1) Any 7 (starts that suit\'s line in the center), (2) The next card in sequence on an existing line — meaning either one higher than the current highest card of that suit, or one lower than the current lowest card of that suit.',
+      'Example: if the heart line currently runs 7-8-9, you can play 10♥ (extending high) or 6♥ (extending low). If the line runs A-2-3-4-5-6-7-8, only 9 through K can extend it at the high end.',
+      'If you cannot play any legal card (or choose not to), you must pass for that turn and take one penalty chip.',
+      'Strategy: holding key cards that block others (like the 6 when someone needs to play it to lay their 5) is the heart of the game. Use this deliberately.',
+      'The first player to play all cards from their hand wins the round. All other players count their remaining cards — each card left = 1 penalty point (or use the chips collected for passing). Play multiple rounds; lowest score wins overall.'
     ]
   },
   {
@@ -716,10 +868,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Flopped a full house and slow-played it perfectly.',
     description: 'The world\'s most popular poker variant. Each player gets 2 private hole cards; 5 community cards are revealed in stages. Build the best 5-card hand from any combination. Four betting rounds keep the pressure on.',
     howTo: [
-      'Post blinds, then deal 2 face-down hole cards to each player.',
-      'First betting round (pre-flop), then reveal 3 community cards (the flop). Bet again.',
-      'Reveal the 4th card (turn), bet; then the 5th (river), final bet.',
-      'Showdown: best 5-card hand from any combination of your 2 hole cards and 5 community cards wins.'
+      'Two players post forced bets before cards are dealt: the player directly left of the dealer posts the "small blind" (half the minimum bet); the next player posts the "big blind" (full minimum bet). These ensure there\'s always something in the pot.',
+      'Deal 2 cards face-DOWN to each player — these are your "hole cards." Keep them secret. No one else ever sees them unless there\'s a showdown.',
+      'Pre-flop betting: starting with the player to the left of the big blind, everyone acts in order. Options: Fold (discard your hand, you\'re out for this hand), Call (match the big blind amount), or Raise (increase the bet). The big blind player gets a final option to raise even if everyone only called.',
+      'The Flop: after pre-flop betting, deal 3 cards face-UP in the center. These are community cards — all players use them. A betting round follows, starting left of the dealer. Players can now also Check (pass without betting if no one has bet yet).',
+      'The Turn: deal a 4th community card face-up. Another betting round.',
+      'The River: deal a 5th and final community card face-up. The final betting round.',
+      'Showdown: if 2 or more players remain after all betting, reveal hole cards. Each player makes their best 5-card hand using any combination of their 2 hole cards and the 5 community cards — you can use both hole cards, one, or even none (playing the board). Best 5-card hand wins the pot.',
+      'Poker hand rankings (best to worst): Royal Flush, Straight Flush, Four of a Kind, Full House, Flush, Straight, Three of a Kind, Two Pair, One Pair, High Card. Ties split the pot. Suits never break ties.',
+      'Tip: you can win without a showdown by making everyone else fold through aggressive betting — that\'s the bluffing element!'
     ]
   },
   {
@@ -736,10 +893,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Lost three games in a row. Demanded rematches each time.',
     description: 'A lightning-fast simultaneous game for two. Both players flip center cards at the same time and race to shed their hand by playing one rank higher or lower onto either pile. No turns — pure reaction speed.',
     howTo: [
-      'Deal 20 cards to each player with two center piles and two face-down replacement piles.',
-      'Both players flip one center card simultaneously — then play freely with no turns.',
-      'Play a card one rank higher or lower than either center pile top.',
-      'Empty your hand pile to win. If both get stuck, flip new center cards and continue.'
+      'Speed is for exactly 2 players. Deal 20 cards to each player, kept in a face-down pile — this is your hand pile. Place 5 cards face-down between you as each player\'s "side pile" (2 side piles total, one on each side of the center). Finally, place 2 cards face-down in the very center.',
+      'From your 20-card hand pile, deal yourself 5 cards to hold. These are the cards you play from.',
+      'Setup complete: from left to right across the center of the table: your side pile | center card | center card | opponent\'s side pile.',
+      'Starting the game: both players simultaneously flip one center card face-up. These two flipped center cards are the two active piles you both play onto.',
+      'Play begins — there are NO turns! Both players play simultaneously and as fast as they can. Play cards from your 5-card hand onto either center pile if the card is one rank HIGHER or one rank LOWER than the current top of that pile. Suits don\'t matter. Aces can be both high (above King) or low (below 2) — wrapping is allowed.',
+      'Immediately after playing a card, draw one card from your own hand pile to keep 5 cards in your hand at all times. If your hand pile runs out, play with fewer.',
+      'Stuck: if neither player can legally play any card, BOTH players simultaneously flip the top card from their side pile onto one of the center piles to unblock play. If side piles are empty, the round is a draw — shuffle all center pile cards and reset.',
+      'Winning: the first player to empty their hand pile (all 5 drawn cards played and hand pile gone) wins the round. First to win a set number of rounds (usually 5) wins the match.'
     ]
   },
   {
@@ -756,10 +917,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Partner called Kemps before I even noticed we had four of a kind.',
     description: 'A hilarious team game where partners devise a secret signal before play. Race to collect four of a kind, then subtly signal your partner to call "Kemps!" If the other team spots your signal and calls "Cut!" first, you lose the round.',
     howTo: [
-      'Partners sit across from each other and secretly agree on a signal (a wink, a tap, etc.).',
-      'Deal 4 cards each; flip 4 to the center. Players swap cards with the center freely.',
-      'Get four of a kind and give your secret signal to your partner.',
-      'Partner calls "Kemps!" to win the round; opponents call "Cut!" if they spot the signal first.'
+      'Kemps requires an even number of players (4, 6, or 8). Split into teams of 2 — partners sit opposite each other, NOT next to each other.',
+      'Before the game starts, each partnership steps away privately and agrees on a secret non-verbal signal — something subtle like tugging an ear, tapping the table twice, straightening posture, or touching a specific finger. The signal must be visible but not obvious.',
+      'From the deck, select one 4-of-a-kind group per player (e.g., four 3s, four 6s, four Jacks, four Aces for 4 players). Shuffle only those cards and deal 4 to each player. Place 4 cards face-up in the center.',
+      'Play is simultaneous — no turns. At any time, any player may pick up a face-up center card and replace it by putting one of their hand cards face-up in the center. You always hold exactly 4 cards.',
+      'The goal: collect all four cards of the same rank. Once you have four of a kind, DO NOT announce it. Instead, give your secret signal to your partner — discreetly, without the other team noticing.',
+      'Calling Kemps: when your PARTNER (not you) spots your signal, they call out "Kemps!" Everyone reveals their hands. If you truly have four of a kind, your team scores 1 point (or wins the round).',
+      'Calling Cut: if the OPPOSING team spots YOUR signal before your partner calls Kemps, they shout "Cut!" and show they caught you. If you do have four of a kind, your team loses 1 point instead.',
+      'Also calling "Kemps" or "Cut" incorrectly (when no one has four of a kind) loses your team 1 point.',
+      'First team to 5 points wins. Change your signal between rounds!'
     ]
   },
   {
@@ -776,10 +942,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Had a 2 the whole time. Bet with total confidence. Big mistake.',
     description: 'Each player draws one card and holds it face-out against their forehead without peeking — everyone sees your card but you. Bet based on what everyone else is showing. Highest card at showdown wins.',
     howTo: [
-      'Deal one card face-down to each player. No peeking.',
-      'Without looking, hold your card face-outward against your forehead.',
-      'Bet based on what you can see on other players\' foreheads — not your own.',
-      'After betting, reveal. Highest card wins the pot.'
+      'Everyone antes a chip or small bet into the pot before cards are dealt.',
+      'Deal exactly one card face-down to each player. Players must NOT look at their own card under any circumstances.',
+      'Without peeking, each player picks up their card and presses it face-outward against their forehead — so every OTHER player can see what you\'re holding, but you cannot.',
+      'Look around the table. You can see everyone else\'s card but not your own. Use this information to guess where your card ranks relative to the others.',
+      'Betting round: starting left of the dealer, each player decides to fold (drop out, forfeit bet), call (match current bet), or raise (increase the bet). Players bet based on what they see on other players\' foreheads and make inferences about their own card. Holding your card high = good? Low = bad. Watch facial reactions!',
+      'After betting is complete, everyone lowers their card and reveals it simultaneously.',
+      'The player with the HIGHEST card wins the entire pot. Card ranking: 2 (low) through Ace (high). Suit does not matter.',
+      'Ties: if two or more players share the highest card, they split the pot. Play as many rounds as you like — the player with the most chips at the end wins.'
     ]
   },
   {
@@ -796,10 +966,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Swapped into an Ace on the last pass. Eliminated immediately.',
     description: 'Also called Cuckoo. Everyone starts with three lives. Each round you try not to end with the lowest card. You can swap with the player to your left — unless they hold a King, which blocks the swap. Ace is lowest.',
     howTo: [
-      'Give everyone 3 tokens (lives) and deal one card each.',
-      'Look at your card; swap with the player to your left or choose to keep it.',
-      'Kings cannot be swapped — holder reveals it immediately and is safe.',
-      'Dealer may swap with the top of the deck. Player with the lowest card loses a life. Last one standing wins.'
+      'Give each player 3 tokens or coins (these are your lives). Shuffle the full deck. Deal exactly one card face-down to each player. Players look at their own card privately without showing anyone.',
+      'Card ranking for this game: King (highest and safe), Queen, Jack, 10, 9, 8, 7, 6, 5, 4, 3, 2, Ace (LOWEST — the worst card to have).',
+      'Starting with the player to the dealer\'s left, each player looks at their card and chooses one of two options: Keep it (do nothing, be satisfied with your card), or Swap it with the player to your LEFT (offer your card face-down — they MUST accept unless they hold a King).',
+      'King blocks the swap: if the player you are trying to swap with holds a King, they immediately reveal it face-up. The swap does not happen — you are stuck with your card.',
+      'After everyone has had their turn, the dealer is last. Instead of swapping with another player, the dealer may choose to swap their card with the TOP card of the remaining deck (drawing one face-down card to replace theirs).',
+      'All players simultaneously reveal their cards. The player holding the LOWEST card loses one life (token). If two or more players tie for lowest, all tied players lose a life.',
+      'Remove any player who has lost all 3 lives. Shuffle and deal again for the next round with the remaining players.',
+      'The last player with at least one life remaining wins the game.'
     ]
   },
   {
@@ -816,10 +990,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Pitched a 4-bid and swept all four points clean.',
     description: 'Also called Setback or High-Low-Jack. Bid to name trump; the highest bidder leads a trump card to set the suit. Score points for capturing High trump, Low trump, the Jack of trump, and Game (most pip value). Miss your bid and get set back.',
     howTo: [
-      'Deal 6 cards each; players bid 2–4 on how many of the 4 available points they\'ll take.',
-      'Highest bidder names trump by leading any trump card ("pitching" it).',
-      'Play out 6 tricks. Score: 1 pt each for High trump, Low trump, Jack of trump, and Game.',
-      'Make bid = score it; fall short = subtract your bid from your score. First to 11 wins.'
+      'Deal 6 cards to each player. Do NOT look at your cards until after you have looked — other players will bid before you see your hand fully.',
+      'There are exactly 4 scorable points in each hand: High (the highest trump card dealt), Low (the lowest trump card dealt), Jack (the Jack of the trump suit — only scores if it is in play), and Game (the team or player with the highest total pip value in won tricks: A=4, K=3, Q=2, J=1, 10=10).',
+      'Bidding: starting left of the dealer, each player bids 2, 3, or 4 — representing how many of the 4 available points they promise to capture. The dealer may take the bid at any amount or pass. The minimum bid is 2. If all pass, the dealer is forced to bid 2.',
+      'The highest bidder wins the auction. They name the trump suit by leading (pitching) any trump card to start the first trick. That first card played is the pitch — it sets the trump.',
+      'Play 6 tricks. You must follow suit if you can. If you cannot follow suit, you may play any card including trump. Trump beats all other suits. Within a suit, cards rank A (high), K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2 (low).',
+      'Scoring High and Low: the player who captures the single highest trump card in play scores 1 point. The player who captures the single lowest trump card in play scores 1 point (even if it\'s captured by an opponent — it scores for whoever CAPTURED it, not who held it at the start).',
+      'Scoring Jack: if the Jack of trump was dealt, the player who captures it scores 1 point. If it wasn\'t dealt, no one scores for Jack.',
+      'Scoring Game: count the pip values of all cards captured in tricks (A=4, K=3, Q=2, J=1, 10=10). The player or team with the highest total earns 1 Game point. If tied, no one scores Game.',
+      'After scoring: if the winning bidder made their bid (scored that many points), they score those points. If they fell short, subtract their bid from their score instead. All other players always score whatever points they took, regardless of the bid.',
+      'First player or team to reach 11 (or 21 by agreement) wins.'
     ]
   },
   {
@@ -836,10 +1016,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Grabbed a 14-card discard pile and went out two turns later.',
     description: 'Rummy with a key twist: the discard pile is fanned face-up and you can take any card from it — as long as you take everything above it too. Meld sets and runs; score their face value. First to 500 wins.',
     howTo: [
-      'Deal 7 cards each (13 for 2 players); fan the discard pile face-up so all cards are visible.',
-      'Draw from the stock or take any card in the discard pile along with everything on top of it.',
-      'Meld sets and runs face-up on the table. Lay off cards onto existing melds.',
-      'Go out by melding all cards. Score the value of your melds minus cards left in hand. First to 500 wins.'
+      'Deal 7 cards each (13 cards each if only 2 players). Place the remaining deck face-down as the stock. Instead of a normal discard pile, fan the discarded cards face-up in a spread so ALL cards in the pile are visible at all times. This is the key feature of Rummy 500.',
+      'Melds are the same as in standard Rummy: Sets (3+ cards of the same rank) and Runs (3+ consecutive cards of the same suit). Aces can be high or low but not both in the same run.',
+      'On your turn, first draw — either the top card from the face-down stock, OR pick up any card in the fanned discard pile. If you take a card that is NOT the top of the pile, you must also take every card on top of it AND immediately use the card you targeted in a meld.',
+      'After drawing, lay down any completed melds face-up on the table. You may also lay off individual cards onto any meld already on the table (yours or another player\'s), as long as the card logically extends or fits the meld.',
+      'End your turn by discarding one card face-up on top of the fanned discard pile.',
+      'Going out: when a player discards or melds their last card, the hand ends. Players do not have to meld all cards to go out — discarding the last card is enough.',
+      'Scoring: each player totals the point value of all cards they melded during the hand. Then subtract the value of any cards remaining in their hand. Positive scores add, negative scores subtract from your running total.',
+      'Card values: A = 15, K/Q/J = 10, number cards = face value, with Ace as 1 if used in a low run (A-2-3).',
+      'The first player to reach 500 cumulative points wins.'
     ]
   },
   {
@@ -856,10 +1041,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Swept the whole table with the 10 of diamonds. Big Cassino.',
     description: 'An old and elegant capture game. Play a card from hand to take table cards that match its value or sum to it. The 10♦ (Big Cassino) and 2♠ (Little Cassino) are worth extra. Score for most cards, most spades, and special cards.',
     howTo: [
-      'Deal 4 to each player and 4 face-up to the table; redeal each time hands empty.',
-      'Play one card to capture table cards that match it or whose values sum to it.',
-      'Build combinations on the table (e.g., "building 9") for future capture.',
-      'Score: most cards (3), most spades (1), Big Cassino 10♦ (2), Little Cassino 2♠ (1), each Ace (1).'
+      'Deal 4 cards to each player and 4 cards face-up to the center of the table. The dealer also deals themselves 4. Each player\'s hand is private; the center cards are visible to everyone. When all hands run out, deal 4 more to each player (but do NOT deal more center cards — only the original 4 stay).',
+      'On your turn, play exactly one card from your hand face-up. You have several options for what that card does: (A) Capture by matching: take one center card that matches your played card\'s number exactly. (B) Capture by summing: take two or more center cards whose values add up to your played card. Example: play a 9 to capture a 6 and a 3, or a 5 and a 4. (C) Build: combine your played card with a center card and announce the target sum. Leave them together on the table as a "build" — you must capture it on a future turn. Example: play a 2 onto a 7 and say "building 9" — you plan to capture it with a 9 later. Opponents can steal your build if they have the right card! (D) Trail: if you cannot or choose not to capture, simply place your card face-up in the center. The table grows.',
+      'Card values: Ace = 1, numbered cards 2–10 = face value, face cards (J, Q, K) can only capture other face cards of the same rank — they cannot be used for summation.',
+      'Special high-value cards: 10♦ is "Big Cassino" = 2 points. 2♠ is "Little Cassino" = 1 point. These are captured normally but score extra at the end.',
+      'When the deck runs out of cards to deal and all hands are empty, the player who made the LAST capture takes all remaining center cards.',
+      'Scoring at the end: most cards captured = 3 points; most spades captured = 1 point; Big Cassino (10♦) = 2 points; Little Cassino (2♠) = 1 point; each Ace captured = 1 point. Maximum possible score per round = 11.',
+      'Bonus — Sweep: if you capture ALL cards on the table in one play, that is a sweep and earns 1 bonus point. Mark it immediately.',
+      'First player or team to reach 21 points wins. If there is a tie, play another round.'
     ]
   },
   {
@@ -876,10 +1065,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Picked up the foot on round two and ran away with it.',
     description: 'A beloved canasta-family partnership game. Each player gets two stacks — a "hand" they start with and a "foot" they open later. Build melds toward canastas across multiple rounds. First partnership to 10,000 points wins.',
     howTo: [
-      'Deal 11 cards as the "hand" and 11 more face-down as the "foot" to each player.',
-      'Draw 2, discard 1. Meld sets of 3+ same rank; jokers and twos are wild.',
-      'Pick up the "foot" only after playing out your entire "hand."',
-      'Complete canastas (7 cards) to be eligible to go out. First to 10,000 points wins.'
+      'Use 4 standard decks plus jokers (typically 216 cards total). Sit in partnerships. Deal 11 cards to each player as their "hand" pile and deal 11 more face-down as their "foot" pile — which they may NOT look at yet. Place the rest as the stock; flip one card face-up.',
+      'Wild cards: all Jokers and all 2s are wild and can substitute for any natural card in a meld. Red 3s: if you draw one, immediately place it face-up in front of you and draw a replacement — red 3s score 100 bonus points each at end of hand.',
+      'On your turn: draw the top 2 cards from the stock. Then optionally meld, add to existing melds, or pick up the discard pile (if you can use the top card in a new meld immediately using 2 matching natural cards from your hand). End your turn by discarding 1 card.',
+      'Melding: lay 3 or more cards of the same rank face-up. Each meld needs at least 2 natural cards. No meld may have more wild cards than natural cards. Jokers = 50 pts, 2s = 20 pts when played as wild, Aces = 20 pts, 8-K = 10 pts, 4-7 = 5 pts, 3 = 5 pts (if you end up with black 3s in hand at end, they cost you −5 each).',
+      'Picking up your foot: once a player\'s hand is completely empty (all cards played or discarded), on their NEXT turn they pick up their foot pile and continue playing.',
+      'Canastas: a meld of exactly 7 cards is a completed canasta. A "clean" canasta (all natural, no wilds) = 500 pts. A "dirty" canasta (contains at least one wild card) = 300 pts. A canasta of wild cards only = 1,500 pts. Wrap canastas with a card on top to identify them.',
+      'Going out: to end the hand, a player must have used their entire foot pile AND their team must have at least 2 clean canastas AND 2 dirty canastas (requirements vary by house rule — agree beforehand). Going out earns 100 bonus points.',
+      'Scoring: total your melded card values + canasta bonuses + red 3 bonuses + going-out bonus, minus the value of any cards left in hand or foot pile. Play multiple rounds. First partnership to 10,000 total points wins.'
     ]
   },
   {
@@ -896,10 +1089,14 @@ window.GAMES_DATA = [
     notePlaceholder: 'Drew the King wild card and slotted it perfectly.',
     description: 'Also called Trash. Deal 10 face-down cards per player in a numbered row. Draw from the deck and place cards in their matching positions (Ace = 1, 2 = 2, and so on). Kings are wild; Jacks and Queens are dead draws. First to fill all ten spots wins.',
     howTo: [
-      'Deal 10 cards face-down in a row to each player, numbered positions 1–10.',
-      'Draw a card; if it fits a numbered position, place it face-up and flip the displaced card.',
-      'Keep placing flipped cards until you draw a Jack, Queen (useless — discard), or a card already filled.',
-      'King is wild — place it anywhere. First to complete all 10 positions wins the round.'
+      'Deal 10 cards face-down to each player in a row, numbered positions 1 through 10 from left to right. Players do NOT look at their cards. Place the remaining deck face-down as the stock.',
+      'Card placement rules: Aces go in position 1, 2s in position 2, 3s in position 3, and so on up to 10s in position 10. Jacks and Queens are "dead" cards with no valid position. Kings are wild and can go in ANY empty position.',
+      'On your turn, draw the top card from the stock. If the card has a valid position in your row AND that position is still face-down: place it face-up in that position. Flip the face-down card that was there into your hand as your new active card. Repeat — keep placing and flipping as long as the newly-flipped card has a valid open position.',
+      'Your chain ends when you flip or draw a card that: (A) is a Jack or Queen (no valid position — discard it face-up), or (B) lands in a position already filled with a face-up card — discard the duplicate face-up.',
+      'Kings are wild: place a King face-up in any empty position you choose. Then flip whatever face-down card was there and continue your chain as normal.',
+      'If you draw directly from the stock and it matches an already-filled position or is a Jack/Queen, discard it and your turn ends.',
+      'Goal: be the first player to fill all 10 positions in your row with face-up cards. When all 10 are filled, you win that round.',
+      'For multiple rounds: in round 2, the winner starts with only 9 positions (remove their worst card choice from the layout). Each subsequent round the winner has one fewer position until a player wins a round needing just 1 card — ultimate winner!'
     ]
   },
   {
@@ -916,10 +1113,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Caught the sandwich from across the table. My finest hour.',
     description: 'A turbo-charged slap game with rules that reward quick eyes. Play cards onto a central pile in turn. Face cards trigger a countdown the next player must beat with their own face card — or give up their chance. Slap the pile instantly on doubles or sandwiches to steal it.',
     howTo: [
-      'Deal all cards out; players hold them face-down without looking.',
-      'Take turns flipping one card face-up onto the central pile.',
-      'Slap the pile immediately for: doubles (same rank back-to-back) or a sandwich (same rank with exactly one card between).',
-      'Face card played (J = 1, Q = 2, K = 3, A = 4 chances): next player must answer with another face card or surrender. Correct slapper takes the pile; false slap costs 2 cards.'
+      'Deal all 52 cards face-down as evenly as possible. Players hold their pile face-down and never look at their cards in advance.',
+      'Starting left of the dealer, take turns flipping one card face-up from the top of your pile onto a single shared central pile. Keep the central pile tidy so all players can clearly see the top two or three cards.',
+      'Slap the pile immediately (at any time, on anyone\'s turn) when you see any of these patterns on top of the central pile: (1) Doubles — two cards of the same rank back-to-back. (2) Sandwich — the top and the card directly below have the same rank, with exactly one different card between them (e.g., 7 – 4 – 7).',
+      'First hand on the pile wins all cards in it. Shuffle them into the bottom of your pile.',
+      'False slap penalty: if you slap when neither condition is met, you must give 2 cards from your pile face-down to the player who most recently played a card.',
+      'Face card rule — the countdown: when a Jack (1), Queen (2), King (3), or Ace (4) is played, the NEXT player must respond by playing another face card within that many flips. Each face card played resets the countdown for the new face card.',
+      'Countdown expires: if the responding player does not flip a face card within the allowed number of flips, the player who played the original face card wins the entire pile.',
+      'BUT — anyone can still slap the pile for a double or sandwich during a countdown, which takes priority and wins the pile instead.',
+      'Running out of cards: if your pile runs out, you stay active and may slap. A successful slap brings you back in. If you slap false when you have no cards, you\'re eliminated.',
+      'The player who collects all 52 cards wins.'
     ]
   },
   {
@@ -936,10 +1139,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Called Cabo with 3 total. No one believed it until the reveal.',
     description: 'A memory-and-deduction game where less is more. Each player gets 4 face-down cards and peeks at two to start. Draw and swap to drive your hand total down. Special face-card powers let you peek or swap blindly. Declare "Cabo!" when you think your total is lowest — but everyone else gets one last turn to catch up.',
     howTo: [
-      'Deal 4 cards face-down to each player; secretly peek at your bottom two.',
-      'On your turn: draw from the stock or discard pile, then either swap it with a face-down card or discard it.',
-      'Face-card powers: King = peek at one of your own; Queen = peek at an opponent\'s; Jack = blind swap with an opponent.',
-      'Call "Cabo!" on your turn to trigger final turns for all others. Lowest total wins — but if someone ties or beats you, you lose instead.'
+      'Deal 4 cards face-down to each player in a 2×2 layout. WITHOUT PICKING THEM UP, each player secretly peeks at their bottom 2 cards only — then places them back face-down. You may not peek at your top 2. Memorize what you saw!',
+      'Card point values: numbered cards 2–10 = face value; Jack = 11, Queen = 12, King = 0 (zero — a great card!), Ace = 1, and the special Red King (K♥ or K♦) = −1 (minus one — the best possible card). You want the LOWEST total.',
+      'On your turn: draw the top card from the stock OR take the top card from the discard pile. Then you must: swap it face-down with one of your 4 grid cards (the replaced card goes face-up on the discard pile), or simply discard it if you don\'t want it. If you swap a card you\'ve never seen, you\'re now tracking that new card instead.',
+      'Special abilities when you DISCARD a face-card (NOT swap — you must discard it to use the power): King = secretly peek at any one of your own face-down grid cards. Queen = secretly peek at any one face-down card belonging to any opponent. Jack = blindly swap one of your face-down cards with one of any opponent\'s face-down cards, without either of you looking.',
+      'Snap-matching (optional rule): when a card is discarded, if any player has an identical card they can immediately discard it on top. If they\'re wrong (the card doesn\'t match), they draw 2 penalty cards.',
+      'Calling Cabo: at the start of YOUR turn (before drawing), you may call "Cabo!" This triggers one final turn for each other player — they each get one more draw-and-swap opportunity.',
+      'After the final round, everyone flips all 4 of their cards face-up and tots up their score. The player who called Cabo wins ONLY if their total is strictly less than every other player\'s total.',
+      'Cabo-caller penalty: if any other player ties or beats the Cabo-caller\'s total, the Cabo-caller scores an additional 10-point penalty on top of their hand total.',
+      'Play multiple rounds. The player with the lowest cumulative score after an agreed number of rounds wins.'
     ]
   },
   {
@@ -956,10 +1164,16 @@ window.GAMES_DATA = [
     notePlaceholder: 'Hit pontoon AND a five-card trick in the same hand. Double payout.',
     description: 'The classic British betting game. Get closer to 21 than the banker without busting. Two special hands beat everything: Pontoon (Ace + any ten-value) and a Five-Card Trick (five cards without busting). Players can twist (hit) or buy (double bet for one card). Ties always go to the banker.',
     howTo: [
-      'One player is the banker; all others place bets, then each player and the banker receive one card face-down.',
-      'Banker deals a second round. Players peek at both cards, then twist (take a card) or buy (double stake for 1 card).',
-      'Bust over 21 and lose your stake immediately. Stick when satisfied at 15–21.',
-      'Banker reveals and must draw to beat all hands. Pontoon (A + 10-value card) and Five-Card Trick pay double.'
+      'One player is the Banker. All other players place a bet before receiving cards. The Banker deals ONE card face-DOWN to each player and one face-down to themselves. Players may peek at their own card but must keep it secret.',
+      'Card values: Ace = 1 or 11 (your choice), Jack/Queen/King = 10, numbered cards = face value. The target is 21 without going over.',
+      'The Banker deals a second card face-DOWN to each player and one to themselves. Players look at both their cards privately.',
+      'Pontoon (instant win): if you have an Ace plus any 10-value card (10, J, Q, or K), you have a Pontoon — the best hand. Keep it secret for now.',
+      'Players act in turn (Banker acts last). Your options: Stick (keep your current hand — only allowed if your total is 15 or higher), Twist (take one more card face-up — free, can twist multiple times), Buy (place an additional bet up to your original stake amount and receive one card face-DOWN — may only buy before twisting; total stake cannot exceed double original).',
+      'Bust: if your total exceeds 21 at any point, immediately reveal your hand face-up and lose your stake to the Banker. Your hand is dead.',
+      'Five-Card Trick: if you take 5 cards without busting, you have a Five-Card Trick — the second-best hand after Pontoon. You cannot take a 6th card.',
+      'After all players have acted, the Banker reveals their cards. The Banker must keep twisting (taking cards) until their total is 17 or more, OR they have 5 cards, OR they bust.',
+      'Payouts: Banker beats all equal totals (ties go to the Banker). Pontoon pays 2:1 (double your stake). Five-Card Trick pays 2:1. Any other winning hand beats the Banker pays 1:1. If Banker has Pontoon, everyone loses. If Banker busts, all remaining players win at 1:1.',
+      'After a round ends, the player who won the most (or a Pontoon) becomes the new Banker. Otherwise the same Banker continues.'
     ]
   },
   {
@@ -976,10 +1190,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Hit 8 tricks as dealer on a terrible hand. Pure graft.',
     description: 'Also called 8-5-3. A crisp three-player trick-taker where each seat has a different quota: the dealer must take 8 of 16 tricks, the second player 5, and the third 3. Beat your quota and extort a card from whoever fell short; miss and pay the toll next round.',
     howTo: [
-      'Deal 16 cards to each player; set 4 aside as a face-down blind. Dealer picks up the blind and discards 4.',
-      'Dealer names trump, then leads the first trick. Follow suit if you can.',
-      'Targets: dealer = 8 tricks, player to dealer\'s left = 5 tricks, remaining player = 3 tricks.',
-      'After the hand, each player who beat their quota takes one card from a player who fell short. Swap continues until targets are met.'
+      'Sergeant Major is for exactly 3 players. Use all 52 cards. Deal 16 cards to each player — 48 cards total. Set the remaining 4 cards face-down in the center as the blind.',
+      'The dealer picks up the 4-card blind, looks at all 20 cards now in hand, then discards any 4 cards face-down (the blind is replaced). The dealer then names the trump suit for this hand.',
+      'Each player has a fixed trick target for the hand: the Dealer must win 8 tricks, the player to the Dealer\'s left must win 5 tricks, and the third player must win 3 tricks. These targets are always the same regardless of who deals — only the seat matters.',
+      'The Dealer leads the first trick. All players must follow the suit led if they have any cards of that suit. If you cannot follow suit, you may play any card including trump.',
+      'The highest trump played wins the trick. If no trump was played, the highest card of the suit led wins. Cards rank A (high), K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2 (low). The winner leads the next trick.',
+      'All 16 tricks are played. Count how many tricks each player won.',
+      'Settling up: any player who beat their target gets to take one card from any player who fell below their target — for each trick they exceeded by. The player who fell short gives away their best card(s). This is done before the next deal.',
+      'Example: Dealer needed 8, took 9 — they take 1 card. The player who needed 5 took 4 — they give 1 card. If a player fell short by 2, they give 2 cards.',
+      'The deal rotates clockwise. Play as many hands as desired. The player who consistently beats their target and wins the card exchanges tends to pull ahead — track cumulative tricks won or use the card-quality system to determine the overall winner.'
     ]
   },
   {
@@ -996,10 +1215,15 @@ window.GAMES_DATA = [
     notePlaceholder: 'Buried their Ace under three cards. Pure spite. Pure malice.',
     description: 'Also called Cat and Mouse — and the inspiration for the commercial game Skip-Bo. Each player races to clear their personal payoff pile by building shared center stacks from Ace to Queen. Manage four personal discard piles as staging ground, and use Kings as wild cards. Block, bait, and deny your opponent the card they need.',
     howTo: [
-      'Shuffle two decks together. Deal 20 cards face-down to each player as their "payoff" pile; flip the top card of each.',
-      'Deal 5 cards to each player\'s hand. Four shared center stacks build Ace → Queen; each player also has 4 personal discard piles.',
-      'On your turn: play from your hand or payoff pile top onto center stacks in sequence, or onto your own discard piles in any order. Kings are wild.',
-      'Refill your hand to 5 at the end of your turn. First player to clear their payoff pile wins.'
+      'Shuffle two standard decks together (104 cards). Deal 20 cards face-down to each player as their personal "payoff pile" — do NOT look at these. Flip the top card of each payoff pile face-up so everyone can see it. The remaining cards form the central draw pile.',
+      'Deal 5 cards face-up to each player as their starting hand. Set up 4 personal discard columns in front of each player (empty to start). In the center of the table, there is space for up to 12 shared "center stacks" — one per Ace that gets played.',
+      'Goal: be the first player to empty your payoff pile by playing all 20 cards onto the shared center stacks.',
+      'Center stacks build Ace upward in sequence by suit: once an Ace is played to start a stack, the next card must be the 2 of that suit, then 3, and so on up to Queen (suits stop at Queen, not King). Kings do not go on center stacks.',
+      'On YOUR turn: (1) Play cards from your HAND onto center stacks wherever they fit in sequence. (2) Play the face-up TOP of your payoff pile onto a center stack if it fits. (3) Play cards from your HAND onto your own personal discard columns — you may place any card on an empty column, or on top of an existing column in any order. (4) Play the TOP card of a discard column onto a center stack if it fits.',
+      'Kings are wild: play a King from your hand onto any center stack to represent whatever card that stack needs next.',
+      'Ending your turn: draw enough cards from the central draw pile to bring your hand back to 5 cards.',
+      'You cannot play from one personal discard column to another. You cannot play an opponent\'s discard columns. You may play AS MANY cards as you want to center stacks on your turn before refilling — but you may only play one card from your payoff pile per turn.',
+      'The first player to flip over the last card of their payoff pile and play it onto a center stack wins the hand.'
     ]
   }
 ];
