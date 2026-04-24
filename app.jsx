@@ -157,7 +157,7 @@ function App() {
           </p>
         </div>
         <div className="header-meta">
-          <div className="hm-item"><strong>25</strong> games curated</div>
+          <div className="hm-item"><strong>{allGames.length}</strong> games curated</div>
           <span className="hm-dot" />
           <div className="hm-item"><strong>3–5</strong> players each</div>
           <span className="hm-dot" />
