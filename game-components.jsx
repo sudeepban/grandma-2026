@@ -1,5 +1,51 @@
 // GameCard + GameDetail modal + PlayLog entry form
 
+function NameInput({ id, value, onChange, placeholder, knownNames }) {
+  const [open, setOpen] = React.useState(false);
+  const wrapRef = React.useRef(null);
+
+  const suggestions = (knownNames || []).filter(n =>
+    n.toLowerCase().includes(value.toLowerCase()) &&
+    n.toLowerCase() !== value.toLowerCase()
+  );
+
+  React.useEffect(() => {
+    function onDown(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, []);
+
+  return (
+    <div className="name-input-wrap" ref={wrapRef}>
+      <input
+        id={id}
+        type="text"
+        value={value}
+        autoComplete="off"
+        placeholder={placeholder}
+        onChange={e => { onChange(e.target.value); setOpen(true); }}
+        onFocus={() => setOpen(true)}
+      />
+      {open && suggestions.length > 0 && (
+        <ul className="name-dropdown" role="listbox">
+          {suggestions.map(name => (
+            <li
+              key={name}
+              className="name-dropdown-item"
+              role="option"
+              onMouseDown={e => { e.preventDefault(); onChange(name); setOpen(false); }}
+            >
+              {name}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 function GameCard({ game, onOpen, plays }) {
   const playerAvgs = perPlayerAverages(plays);
   const accent = game.accent || 'burgundy';
@@ -62,7 +108,7 @@ function perPlayerAverages(plays) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
+function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay, knownNames }) {
   const [tab, setTab] = React.useState('how');
   const [formOpen, setFormOpen] = React.useState(false);
 
@@ -160,6 +206,7 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
             {formOpen && (
               <PlayLogForm
                 game={game}
+                knownNames={knownNames}
                 onCancel={() => setFormOpen(false)}
                 onSubmit={(entry) => {
                   onAddPlay(game.id, entry);
@@ -186,7 +233,7 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
   );
 }
 
-function PlayLogForm({ game, onCancel, onSubmit }) {
+function PlayLogForm({ game, onCancel, onSubmit, knownNames }) {
   const [playerRatings, setPlayerRatings] = React.useState(
     Array.from({ length: 3 }, () => ({ name: '', rating: 0 }))
   );
@@ -196,13 +243,7 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
 
   const canSubmit = playerRatings.length > 0 && playerRatings.every(p => p.name.trim() && p.rating > 0);
 
-  const NAME_SHORTCUTS = { g: 'Grandma', k: 'Kiran', m: 'Mia', d: 'Deep', s: 'Samantha' };
-
   function updatePlayer(i, field, value) {
-    if (field === 'name' && value.length === 1) {
-      const expanded = NAME_SHORTCUTS[value.toLowerCase()];
-      if (expanded && playerRatings[i].name === '') value = expanded;
-    }
     setPlayerRatings(prev => prev.map((p, idx) => idx === i ? { ...p, [field]: value } : p));
   }
 
@@ -234,11 +275,11 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
         <label>Who played & how did they rate it? <span className="req">*</span></label>
         {playerRatings.map((p, i) => (
           <div key={i} className="pf-player-row">
-            <input
-              type="text"
+            <NameInput
               value={p.name}
-              onChange={e => updatePlayer(i, 'name', e.target.value)}
+              onChange={v => updatePlayer(i, 'name', v)}
               placeholder={i === 0 ? 'Grandma' : `Player ${i + 1}`}
+              knownNames={knownNames}
             />
             <StarRating value={p.rating} onChange={v => updatePlayer(i, 'rating', v)} size={30} />
             {playerRatings.length > 1 && (
@@ -261,12 +302,12 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
       <div className="pf-row">
         <div className="pf-field">
           <label htmlFor="pf-winner">Who won? <span className="opt">(optional)</span></label>
-          <input
+          <NameInput
             id="pf-winner"
-            type="text"
             value={winner}
-            onChange={(e) => setWinner(e.target.value)}
+            onChange={setWinner}
             placeholder="Grandma, obviously"
+            knownNames={knownNames}
           />
         </div>
         <div className="pf-field">

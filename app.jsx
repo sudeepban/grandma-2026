@@ -136,6 +136,20 @@ function App() {
 
   const totalPlays = Object.values(plays).reduce((s, arr) => s + arr.length, 0);
 
+  const knownNames = useMemo(() => {
+    const names = new Set();
+    for (const arr of Object.values(plays)) {
+      for (const play of arr) {
+        if (Array.isArray(play.ratings)) {
+          play.ratings.forEach(r => { if (r.name) names.add(r.name); });
+        } else if (play.who) {
+          play.who.split(', ').forEach(n => { if (n.trim()) names.add(n.trim()); });
+        }
+      }
+    }
+    return Array.from(names).sort();
+  }, [plays]);
+
   return (
     <div>
       <header className="site-header">
@@ -244,6 +258,7 @@ function App() {
           onClose={() => setOpenId(null)}
           onAddPlay={addPlay}
           onDeletePlay={deletePlay}
+          knownNames={knownNames}
         />
       )}
 
