@@ -134,7 +134,7 @@ function App() {
           </h1>
           <p className="site-sub">
             These are your games, Grandma — twenty-five of the best, all perfect for a table of three to five.
-            Pick one, play it tonight, and we'll log how it went so next birthday we know exactly which ones made you laugh the loudest.
+            Pick one, play it tonight, and we'll log how it went so we never forget which ones were your favorites.
           </p>
         </div>
         <div className="header-meta">
