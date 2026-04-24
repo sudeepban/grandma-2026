@@ -240,7 +240,7 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
               onChange={e => updatePlayer(i, 'name', e.target.value)}
               placeholder={i === 0 ? 'Grandma' : `Player ${i + 1}`}
             />
-            <StarRating value={p.rating} onChange={v => updatePlayer(i, 'rating', v)} size={24} />
+            <StarRating value={p.rating} onChange={v => updatePlayer(i, 'rating', v)} size={30} />
             {playerRatings.length > 1 && (
               <button
                 type="button"
@@ -321,13 +321,13 @@ function PlayEntry({ play, onDelete }) {
           play.ratings.map((r, i) => (
             <div key={i} className="pe-player-rating">
               <span className="pe-player-name">{r.name}</span>
-              <StarRating value={r.rating} readOnly size={15} />
+              <StarRating value={r.rating} readOnly size={20} />
             </div>
           ))
         ) : (
           <div className="pe-player-rating">
             <span className="pe-player-name">{play.who}</span>
-            <StarRating value={play.rating} readOnly size={15} />
+            <StarRating value={play.rating} readOnly size={20} />
           </div>
         )}
       </div>
