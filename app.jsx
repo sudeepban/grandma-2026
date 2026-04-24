@@ -13,10 +13,11 @@ function durationCategory(minutes) {
 // Decorate games with a corner suit/rank for visual flair, and inject a duration category
 function decorateGames(games) {
   const combos = [
-    { rank: 'A', suit: 'hearts' }, { rank: 'K', suit: 'spades' },
-    { rank: 'Q', suit: 'diamonds' }, { rank: 'J', suit: 'clubs' },
-    { rank: '10', suit: 'hearts' }, { rank: '9', suit: 'spades' },
-    { rank: '8', suit: 'diamonds' }, { rank: '7', suit: 'clubs' }
+    { rank: 'A',  suit: 'hearts'   }, { rank: '2', suit: 'spades'   },
+    { rank: '3',  suit: 'diamonds' }, { rank: '4', suit: 'clubs'    },
+    { rank: '5',  suit: 'hearts'   }, { rank: '6', suit: 'spades'   },
+    { rank: '7',  suit: 'diamonds' }, { rank: '8', suit: 'clubs'    },
+    { rank: '9',  suit: 'hearts'   }, { rank: '10', suit: 'spades'  }
   ];
   return games.map((g, i) => ({
     ...g,
@@ -33,10 +34,10 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 }/*EDITMODE-END*/;
 
 const ACCENT_PRESETS = {
-  burgundy: { '--burgundy': 'oklch(0.42 0.12 20)', '--burgundy-deep': 'oklch(0.32 0.13 20)', '--burgundy-soft': 'oklch(0.55 0.10 20)' },
-  forest:   { '--burgundy': 'oklch(0.40 0.09 155)', '--burgundy-deep': 'oklch(0.30 0.09 155)', '--burgundy-soft': 'oklch(0.52 0.08 155)' },
-  navy:     { '--burgundy': 'oklch(0.38 0.09 255)', '--burgundy-deep': 'oklch(0.28 0.10 255)', '--burgundy-soft': 'oklch(0.52 0.08 255)' },
-  plum:     { '--burgundy': 'oklch(0.40 0.10 325)', '--burgundy-deep': 'oklch(0.30 0.11 325)', '--burgundy-soft': 'oklch(0.55 0.09 325)' }
+  burgundy: { '--burgundy': 'oklch(0.65 0.15 210)', '--burgundy-deep': 'oklch(0.55 0.15 210)', '--burgundy-soft': 'oklch(0.75 0.12 210)' },
+  forest:   { '--burgundy': 'oklch(0.62 0.14 170)', '--burgundy-deep': 'oklch(0.52 0.14 170)', '--burgundy-soft': 'oklch(0.72 0.11 170)' },
+  navy:     { '--burgundy': 'oklch(0.68 0.10 248)', '--burgundy-deep': 'oklch(0.58 0.11 248)', '--burgundy-soft': 'oklch(0.78 0.08 248)' },
+  plum:     { '--burgundy': 'oklch(0.65 0.12 285)', '--burgundy-deep': 'oklch(0.55 0.13 285)', '--burgundy-soft': 'oklch(0.75 0.10 285)' }
 };
 
 function App() {
@@ -274,10 +275,10 @@ function App() {
             value={tweaks.accentColor}
             onChange={v => tweaks.set('accentColor', v)}
             options={[
-              { value: 'burgundy', label: 'Burgundy' },
-              { value: 'forest', label: 'Forest' },
-              { value: 'navy', label: 'Navy' },
-              { value: 'plum', label: 'Plum' }
+              { value: 'burgundy', label: 'Teal' },
+              { value: 'forest', label: 'Sea Green' },
+              { value: 'navy', label: 'Periwinkle' },
+              { value: 'plum', label: 'Violet' }
             ]}
           />
         </TweakSection>
