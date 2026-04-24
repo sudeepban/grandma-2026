@@ -4,7 +4,13 @@ const { useState, useEffect, useMemo } = React;
 
 // Plays are stored in Firestore (see sync.js). We keep a local mirror for UI.
 
-// Decorate games with a corner suit/rank for visual flair
+function durationCategory(minutes) {
+  if (minutes <= 15) return 'Quick';
+  if (minutes <= 35) return 'Medium';
+  return 'Long';
+}
+
+// Decorate games with a corner suit/rank for visual flair, and inject a duration category
 function decorateGames(games) {
   const combos = [
     { rank: 'A', suit: 'hearts' }, { rank: 'K', suit: 'spades' },
@@ -12,7 +18,11 @@ function decorateGames(games) {
     { rank: '10', suit: 'hearts' }, { rank: '9', suit: 'spades' },
     { rank: '8', suit: 'diamonds' }, { rank: '7', suit: 'clubs' }
   ];
-  return games.map((g, i) => ({ ...g, corner: combos[i % combos.length] }));
+  return games.map((g, i) => ({
+    ...g,
+    corner: combos[i % combos.length],
+    categories: [...g.categories, durationCategory(g.minutes)],
+  }));
 }
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -142,7 +152,7 @@ function App() {
             Card Games for Grandma
           </h1>
           <p className="site-sub">
-            These are your games, Grandma — twenty-five of the best, all perfect for a table of three to five.
+            These are your games, Grandma — 25+ of the best, all perfect for a table of three to five.
             Pick one, play it tonight, and we'll log how it went so we never forget which ones were your favorites.
           </p>
         </div>
