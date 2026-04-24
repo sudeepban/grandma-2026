@@ -817,12 +817,43 @@ input, textarea, select { font-family: inherit; color: inherit; }
   padding-top: 4px;
 }
 
+.name-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.name-input-wrap input { width: 100%; }
+.name-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--cream);
+  border: 1px solid var(--burgundy-soft);
+  border-radius: 10px;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  z-index: 200;
+  box-shadow: var(--shadow-md);
+  max-height: 220px;
+  overflow-y: auto;
+}
+.name-dropdown-item {
+  padding: 10px 16px;
+  font-size: 17px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+.name-dropdown-item:hover { background: var(--cream-soft); color: var(--burgundy); }
+
 .pf-player-row {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.pf-player-row input { flex: 1; min-width: 0; }
+.pf-player-row .name-input-wrap { flex: 1; min-width: 0; }
 .pf-player-remove {
   background: transparent;
   border: none;
