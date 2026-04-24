@@ -11,7 +11,7 @@ function GameCard({ game, onOpen, plays }) {
       <CardCorner rank={game.corner?.rank || 'A'} suit={game.corner?.suit || 'spades'} rotated />
 
       <div className="gc-top">
-        <span className="gc-cat">{game.categories[0]}</span>
+        <span className="gc-cat">{game.categories.join(' · ')}</span>
         {avgRating !== null && (
           <span className="gc-avg" title="Average rating from play log">
             <span className="gc-avg-star">★</span>
