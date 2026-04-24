@@ -43,7 +43,7 @@
             const d   = child.val();
             const gid = d.gameId;
             if (!gid) return;
-            (next[gid] = next[gid] || []).push({
+            const entry = {
               id: child.key,
               rating: d.rating,
               who: d.who,
@@ -52,7 +52,13 @@
               note: d.note || '',
               winner: d.winner || '',
               createdAt: d.createdAt || 0
-            });
+            };
+            if (d.ratings) {
+              entry.ratings = Array.isArray(d.ratings)
+                ? d.ratings
+                : Object.values(d.ratings);
+            }
+            (next[gid] = next[gid] || []).push(entry);
           });
           // Keep each game's plays in chronological order
           Object.values(next).forEach(arr => arr.sort((a, b) => a.createdAt - b.createdAt));
@@ -80,17 +86,23 @@
   async function addPlay(gameId, entry) {
     if (!state.ready) throw new Error('Realtime DB not ready');
     const { ref, push } = state._rtdb;
-    const newRef = await push(ref(state.db, 'plays'), {
+    const who = entry.who ||
+      (Array.isArray(entry.ratings) ? entry.ratings.map(r => r.name).filter(Boolean).join(', ') : '');
+    const payload = {
       gameId,
       rating: entry.rating,
-      who: entry.who,
+      who,
       players: entry.players,
       date: entry.date,
       note: entry.note || '',
       winner: entry.winner || '',
       passphrase: window.FAMILY_PASSPHRASE || '',
       createdAt: Date.now()
-    });
+    };
+    if (Array.isArray(entry.ratings) && entry.ratings.length > 0) {
+      payload.ratings = entry.ratings;
+    }
+    const newRef = await push(ref(state.db, 'plays'), payload);
     return newRef.key;
   }
 
