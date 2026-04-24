@@ -147,12 +147,12 @@ function App() {
         <div className="title-block">
           <div className="eyebrow">A Birthday Card Night · For Grandma</div>
           <h1 className="site-title">
-            25+{tweaks.headerStyle === 'ribbon' && <span className="ribbon"> ♦ </span>}
+            50{tweaks.headerStyle === 'ribbon' && <span className="ribbon"> ♦ </span>}
             {tweaks.headerStyle !== 'ribbon' && ' '}
             Card Games for Grandma
           </h1>
           <p className="site-sub">
-            These are your games, Grandma — 25+ of the best, all perfect for a table of three to five.
+            These are your games, Grandma — 50 of the best, all perfect for a table of three to five.
             Pick one, play it tonight, and we'll log how it went so we never forget which ones were your favorites.
           </p>
         </div>

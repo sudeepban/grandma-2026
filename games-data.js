@@ -1,4 +1,4 @@
-// 25 classic & popular card games great for 3-5 players
+// 50 classic & popular card games great for 3-5 players
 // Uses a standard 52-card deck unless noted. Curated for Grandma's birthday night.
 
 window.GAMES_DATA = [
@@ -880,6 +880,126 @@ window.GAMES_DATA = [
       'Draw 2, discard 1. Meld sets of 3+ same rank; jokers and twos are wild.',
       'Pick up the "foot" only after playing out your entire "hand."',
       'Complete canastas (7 cards) to be eligible to go out. First to 10,000 points wins.'
+    ]
+  },
+  {
+    id: 'garbage',
+    name: 'Garbage',
+    tagline: 'Race to arrange Ace through 10 in order.',
+    players: [2, 3, 4, 5],
+    best: 3,
+    minutes: 20,
+    difficulty: 1,
+    luck: 4,
+    deck: 'Standard 52',
+    categories: ['Layout', 'Kids-friendly'],
+    notePlaceholder: 'Drew the King wild card and slotted it perfectly.',
+    description: 'Also called Trash. Deal 10 face-down cards per player in a numbered row. Draw from the deck and place cards in their matching positions (Ace = 1, 2 = 2, and so on). Kings are wild; Jacks and Queens are dead draws. First to fill all ten spots wins.',
+    howTo: [
+      'Deal 10 cards face-down in a row to each player, numbered positions 1–10.',
+      'Draw a card; if it fits a numbered position, place it face-up and flip the displaced card.',
+      'Keep placing flipped cards until you draw a Jack, Queen (useless — discard), or a card already filled.',
+      'King is wild — place it anywhere. First to complete all 10 positions wins the round.'
+    ]
+  },
+  {
+    id: 'egyptian-rat-screw',
+    name: 'Egyptian Rat Screw',
+    tagline: 'Slap the pile — but only when the rules say so.',
+    players: [2, 3, 4, 5, 6, 7, 8],
+    best: 5,
+    minutes: 20,
+    difficulty: 2,
+    luck: 4,
+    deck: 'Standard 52',
+    categories: ['Action', 'Social', 'Kids-friendly'],
+    notePlaceholder: 'Caught the sandwich from across the table. My finest hour.',
+    description: 'A turbo-charged slap game with rules that reward quick eyes. Play cards onto a central pile in turn. Face cards trigger a countdown the next player must beat with their own face card — or give up their chance. Slap the pile instantly on doubles or sandwiches to steal it.',
+    howTo: [
+      'Deal all cards out; players hold them face-down without looking.',
+      'Take turns flipping one card face-up onto the central pile.',
+      'Slap the pile immediately for: doubles (same rank back-to-back) or a sandwich (same rank with exactly one card between).',
+      'Face card played (J = 1, Q = 2, K = 3, A = 4 chances): next player must answer with another face card or surrender. Correct slapper takes the pile; false slap costs 2 cards.'
+    ]
+  },
+  {
+    id: 'cabo',
+    name: 'Cabo',
+    tagline: 'Peek, swap, and call Cabo when your total is low.',
+    players: [2, 3, 4, 5],
+    best: 4,
+    minutes: 25,
+    difficulty: 2,
+    luck: 3,
+    deck: 'Standard 52',
+    categories: ['Memory', 'Draw & Discard'],
+    notePlaceholder: 'Called Cabo with 3 total. No one believed it until the reveal.',
+    description: 'A memory-and-deduction game where less is more. Each player gets 4 face-down cards and peeks at two to start. Draw and swap to drive your hand total down. Special face-card powers let you peek or swap blindly. Declare "Cabo!" when you think your total is lowest — but everyone else gets one last turn to catch up.',
+    howTo: [
+      'Deal 4 cards face-down to each player; secretly peek at your bottom two.',
+      'On your turn: draw from the stock or discard pile, then either swap it with a face-down card or discard it.',
+      'Face-card powers: King = peek at one of your own; Queen = peek at an opponent\'s; Jack = blind swap with an opponent.',
+      'Call "Cabo!" on your turn to trigger final turns for all others. Lowest total wins — but if someone ties or beats you, you lose instead.'
+    ]
+  },
+  {
+    id: 'pontoon',
+    name: 'Pontoon',
+    tagline: "Britain's answer to Blackjack — with two winning bonuses.",
+    players: [3, 4, 5, 6, 7, 8],
+    best: 5,
+    minutes: 20,
+    difficulty: 2,
+    luck: 3,
+    deck: 'Standard 52',
+    categories: ['Counting', 'Social'],
+    notePlaceholder: 'Hit pontoon AND a five-card trick in the same hand. Double payout.',
+    description: 'The classic British betting game. Get closer to 21 than the banker without busting. Two special hands beat everything: Pontoon (Ace + any ten-value) and a Five-Card Trick (five cards without busting). Players can twist (hit) or buy (double bet for one card). Ties always go to the banker.',
+    howTo: [
+      'One player is the banker; all others place bets, then each player and the banker receive one card face-down.',
+      'Banker deals a second round. Players peek at both cards, then twist (take a card) or buy (double stake for 1 card).',
+      'Bust over 21 and lose your stake immediately. Stick when satisfied at 15–21.',
+      'Banker reveals and must draw to beat all hands. Pontoon (A + 10-value card) and Five-Card Trick pay double.'
+    ]
+  },
+  {
+    id: 'sergeant-major',
+    name: 'Sergeant Major',
+    tagline: 'Three players, three different trick targets.',
+    players: [3],
+    best: 3,
+    minutes: 30,
+    difficulty: 3,
+    luck: 2,
+    deck: 'Standard 52',
+    categories: ['Trick-taking', 'Bidding'],
+    notePlaceholder: 'Hit 8 tricks as dealer on a terrible hand. Pure graft.',
+    description: 'Also called 8-5-3. A crisp three-player trick-taker where each seat has a different quota: the dealer must take 8 of 16 tricks, the second player 5, and the third 3. Beat your quota and extort a card from whoever fell short; miss and pay the toll next round.',
+    howTo: [
+      'Deal 16 cards to each player; set 4 aside as a face-down blind. Dealer picks up the blind and discards 4.',
+      'Dealer names trump, then leads the first trick. Follow suit if you can.',
+      'Targets: dealer = 8 tricks, player to dealer\'s left = 5 tricks, remaining player = 3 tricks.',
+      'After the hand, each player who beat their quota takes one card from a player who fell short. Swap continues until targets are met.'
+    ]
+  },
+  {
+    id: 'spite-and-malice',
+    name: 'Spite and Malice',
+    tagline: "Competitive solitaire — block your rival's stack.",
+    players: [2, 3, 4],
+    best: 2,
+    minutes: 30,
+    difficulty: 2,
+    luck: 3,
+    deck: 'Two standard decks',
+    categories: ['Patience', 'Strategy'],
+    notePlaceholder: 'Buried their Ace under three cards. Pure spite. Pure malice.',
+    description: 'Also called Cat and Mouse — and the inspiration for the commercial game Skip-Bo. Each player races to clear their personal payoff pile by building shared center stacks from Ace to Queen. Manage four personal discard piles as staging ground, and use Kings as wild cards. Block, bait, and deny your opponent the card they need.',
+    howTo: [
+      'Shuffle two decks together. Deal 20 cards face-down to each player as their "payoff" pile; flip the top card of each.',
+      'Deal 5 cards to each player\'s hand. Four shared center stacks build Ace → Queen; each player also has 4 personal discard piles.',
+      'On your turn: play from your hand or payoff pile top onto center stacks in sequence, or onto your own discard piles in any order. Kings are wild.',
+      'Refill your hand to 5 at the end of your turn. First player to clear their payoff pile wins.'
     ]
   }
 ];
