@@ -172,15 +172,18 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay }) {
 }
 
 function PlayLogForm({ game, onCancel, onSubmit }) {
-  const [rating, setRating] = React.useState(0);
-  const [who, setWho] = React.useState('');
-  const [players, setPlayers] = React.useState(game.best || 4);
+  const [playerRatings, setPlayerRatings] = React.useState(
+    Array.from({ length: game.best || 3 }, () => ({ name: '', rating: 0 }))
+  );
   const [date, setDate] = React.useState(() => new Date().toISOString().slice(0, 10));
   const [note, setNote] = React.useState('');
   const [winner, setWinner] = React.useState('');
 
-  const validPlayerOptions = game.players;
-  const canSubmit = rating > 0 && who.trim().length > 0;
+  const canSubmit = playerRatings.length > 0 && playerRatings.every(p => p.name.trim() && p.rating > 0);
+
+  function updatePlayer(i, field, value) {
+    setPlayerRatings(prev => prev.map((p, idx) => idx === i ? { ...p, [field]: value } : p));
+  }
 
   return (
     <form
@@ -188,11 +191,12 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
       onSubmit={(e) => {
         e.preventDefault();
         if (!canSubmit) return;
+        const avg = playerRatings.reduce((s, p) => s + p.rating, 0) / playerRatings.length;
         onSubmit({
           id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
-          rating,
-          who: who.trim(),
-          players,
+          ratings: playerRatings,
+          rating: avg,
+          players: playerRatings.length,
           date,
           note: note.trim(),
           winner: winner.trim(),
@@ -206,20 +210,42 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
       </div>
 
       <div className="pf-field">
-        <label>How did you like it? <span className="req">*</span></label>
-        <StarRating value={rating} onChange={setRating} size={28} />
+        <label>Who played & how did they rate it? <span className="req">*</span></label>
+        {playerRatings.map((p, i) => (
+          <div key={i} className="pf-player-row">
+            <input
+              type="text"
+              value={p.name}
+              onChange={e => updatePlayer(i, 'name', e.target.value)}
+              placeholder={i === 0 ? 'Grandma' : `Player ${i + 1}`}
+            />
+            <StarRating value={p.rating} onChange={v => updatePlayer(i, 'rating', v)} size={24} />
+            {playerRatings.length > 1 && (
+              <button
+                type="button"
+                className="pf-player-remove"
+                onClick={() => setPlayerRatings(prev => prev.filter((_, idx) => idx !== i))}
+                aria-label="Remove player"
+              >×</button>
+            )}
+          </div>
+        ))}
+        <button
+          type="button"
+          className="pf-add-player"
+          onClick={() => setPlayerRatings(prev => [...prev, { name: '', rating: 0 }])}
+        >+ Add player</button>
       </div>
 
       <div className="pf-row">
         <div className="pf-field">
-          <label htmlFor="pf-who">Your name <span className="req">*</span></label>
+          <label htmlFor="pf-winner">Who won? <span className="opt">(optional)</span></label>
           <input
-            id="pf-who"
+            id="pf-winner"
             type="text"
-            value={who}
-            onChange={(e) => setWho(e.target.value)}
-            placeholder="Grandma, Henry, Mae…"
-            required
+            value={winner}
+            onChange={(e) => setWinner(e.target.value)}
+            placeholder="Grandma, obviously"
           />
         </div>
         <div className="pf-field">
@@ -231,33 +257,6 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-      </div>
-
-      <div className="pf-field">
-        <label>Number of players</label>
-        <div className="pf-pill-row">
-          {validPlayerOptions.map(n => (
-            <button
-              key={n}
-              type="button"
-              className={`pf-pill ${players === n ? 'pf-pill-on' : ''}`}
-              onClick={() => setPlayers(n)}
-            >
-              {n}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="pf-field">
-        <label htmlFor="pf-winner">Who won? <span className="opt">(optional)</span></label>
-        <input
-          id="pf-winner"
-          type="text"
-          value={winner}
-          onChange={(e) => setWinner(e.target.value)}
-          placeholder="Grandma, obviously"
-        />
       </div>
 
       <div className="pf-field">
@@ -273,9 +272,7 @@ function PlayLogForm({ game, onCancel, onSubmit }) {
 
       <div className="pf-actions">
         <button type="button" className="btn-ghost" onClick={onCancel}>Cancel</button>
-        <button type="submit" className="btn-primary" disabled={!canSubmit}>
-          Save play
-        </button>
+        <button type="submit" className="btn-primary" disabled={!canSubmit}>Save play</button>
       </div>
     </form>
   );
@@ -288,20 +285,30 @@ function PlayEntry({ play, onDelete }) {
       return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
     } catch { return play.date; }
   })();
+  const hasIndividualRatings = Array.isArray(play.ratings) && play.ratings.length > 0;
   return (
     <div className="play-entry">
       <div className="pe-row">
-        <div className="pe-who">
-          <span className="pe-name">{play.who}</span>
-          <span className="pe-date">{dateLabel}</span>
-        </div>
-        <div className="pe-rating">
-          <StarRating value={play.rating} readOnly size={16} />
+        <span className="pe-date">{dateLabel}</span>
+        <div className="pe-meta">
+          <span className="pe-chip">{play.players} players</span>
+          {play.winner && <span className="pe-chip pe-chip-gold">🏆 {play.winner}</span>}
         </div>
       </div>
-      <div className="pe-meta">
-        <span className="pe-chip">{play.players} players</span>
-        {play.winner && <span className="pe-chip pe-chip-gold">🏆 {play.winner}</span>}
+      <div className="pe-ratings">
+        {hasIndividualRatings ? (
+          play.ratings.map((r, i) => (
+            <div key={i} className="pe-player-rating">
+              <span className="pe-player-name">{r.name}</span>
+              <StarRating value={r.rating} readOnly size={15} />
+            </div>
+          ))
+        ) : (
+          <div className="pe-player-rating">
+            <span className="pe-player-name">{play.who}</span>
+            <StarRating value={play.rating} readOnly size={15} />
+          </div>
+        )}
       </div>
       {play.note && <p className="pe-note">"{play.note}"</p>}
       <button className="pe-delete" onClick={onDelete} aria-label="Delete entry">Remove</button>
