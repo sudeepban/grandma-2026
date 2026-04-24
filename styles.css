@@ -798,6 +798,37 @@ input, textarea, select { font-family: inherit; color: inherit; }
   padding-top: 4px;
 }
 
+.pf-player-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pf-player-row input { flex: 1; min-width: 0; }
+.pf-player-remove {
+  background: transparent;
+  border: none;
+  color: var(--ink-faint);
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.pf-player-remove:hover { color: var(--burgundy); }
+.pf-add-player {
+  background: transparent;
+  border: none;
+  color: var(--burgundy);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 2px 0;
+  align-self: flex-start;
+}
+.pf-add-player:hover { opacity: 0.7; }
+
 /* Stars */
 .star-row { display: inline-flex; gap: 2px; }
 .star {
@@ -852,7 +883,7 @@ input, textarea, select { font-family: inherit; color: inherit; }
   text-transform: uppercase;
   color: var(--ink-faint);
 }
-.pe-meta { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.pe-meta { display: flex; gap: 6px; flex-wrap: wrap; }
 .pe-chip {
   font-size: 11px;
   padding: 3px 10px;
@@ -892,6 +923,25 @@ input, textarea, select { font-family: inherit; color: inherit; }
 }
 .play-entry:hover .pe-delete { opacity: 1; }
 .pe-delete:hover { color: var(--burgundy); }
+.pe-meta { margin-top: 0; }
+.pe-ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 8px 0 2px;
+}
+.pe-player-rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pe-player-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
 
 /* ── FOOTER ─────────────────────────────────────────── */
 
