@@ -336,7 +336,7 @@ input, textarea, select { font-family: inherit; color: inherit; }
 .gc-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 12px;
   position: relative;
   z-index: 2;
@@ -348,13 +348,15 @@ input, textarea, select { font-family: inherit; color: inherit; }
   text-transform: uppercase;
   color: var(--burgundy);
   font-weight: 500;
+  flex: 1;
+  min-width: 0;
 }
 .gc-avg {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 .gc-avg-player {
   display: inline-flex;
