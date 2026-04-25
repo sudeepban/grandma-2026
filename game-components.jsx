@@ -118,6 +118,10 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay, knownNames 
 
   if (!game) return null;
   const playerAvgs = perPlayerAverages(plays);
+  const ratedPlays = plays.filter(p => p.rating > 0);
+  const overallAvg = ratedPlays.length > 0
+    ? ratedPlays.reduce((s, p) => s + p.rating, 0) / ratedPlays.length
+    : null;
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -128,7 +132,15 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay, knownNames 
         <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
 
         <div className="modal-header">
-          <span className="md-cat">{game.categories.join(' · ')}</span>
+          <div className="md-top">
+            <span className="md-cat">{game.categories.join(' · ')}</span>
+            {overallAvg !== null && (
+              <span className="gc-avg md-avg">
+                <span className="gc-avg-star">★</span>
+                {overallAvg.toFixed(1)}
+              </span>
+            )}
+          </div>
           <h2 className="md-title">{game.name}</h2>
           <p className="md-tagline">{game.tagline}</p>
         </div>

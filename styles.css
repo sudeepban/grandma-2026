@@ -591,15 +591,22 @@ input, textarea, select { font-family: inherit; color: inherit; }
 .modal-close:hover { background: var(--burgundy); color: var(--cream); border-color: var(--burgundy); }
 
 .modal-header { margin-bottom: 22px; padding-right: 40px; }
+.md-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
 .md-cat {
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--burgundy);
-  display: block;
-  margin-bottom: 8px;
+  flex: 1;
+  min-width: 0;
 }
+.md-avg { font-size: 17px; margin-left: 12px; }
 .md-title {
   font-family: var(--font-display);
   font-size: 56px;
