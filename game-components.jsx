@@ -47,7 +47,10 @@ function NameInput({ id, value, onChange, placeholder, knownNames }) {
 }
 
 function GameCard({ game, onOpen, plays }) {
-  const playerAvgs = perPlayerAverages(plays);
+  const ratedPlays = plays.filter(p => p.rating > 0);
+  const overallAvg = ratedPlays.length > 0
+    ? ratedPlays.reduce((s, p) => s + p.rating, 0) / ratedPlays.length
+    : null;
   const accent = game.accent || 'burgundy';
   return (
     <article className={`game-card accent-${accent}`} onClick={() => onOpen(game)}>
@@ -56,15 +59,10 @@ function GameCard({ game, onOpen, plays }) {
 
       <div className="gc-top">
         <span className="gc-cat">{game.categories.join(' · ')}</span>
-        {playerAvgs.length > 0 && (
-          <span className="gc-avg" title="Per-player averages">
-            {playerAvgs.map(({ name, avg }) => (
-              <span key={name} className="gc-avg-player">
-                <span className="gc-avg-name">{name[0]}</span>
-                <span className="gc-avg-star">★</span>
-                {avg.toFixed(1)}
-              </span>
-            ))}
+        {overallAvg !== null && (
+          <span className="gc-avg">
+            <span className="gc-avg-star">★</span>
+            {overallAvg.toFixed(1)}
           </span>
         )}
       </div>
