@@ -241,8 +241,8 @@ input, textarea, select { font-family: inherit; color: inherit; }
 
 /* ── SEARCH ─────────────────────────────────────────── */
 
-.filter-group-search { margin-left: auto; }
 .search-input {
+  flex: 1;
   background: var(--cream);
   border: 1px solid var(--rule-strong);
   border-radius: 999px;
@@ -250,11 +250,11 @@ input, textarea, select { font-family: inherit; color: inherit; }
   font-size: 15px;
   color: var(--ink);
   outline: none;
-  width: 200px;
-  transition: border-color 0.15s, width 0.2s;
+  min-width: 0;
+  transition: border-color 0.15s;
 }
 .search-input::placeholder { color: var(--ink-faint); }
-.search-input:focus { border-color: var(--burgundy); width: 260px; }
+.search-input:focus { border-color: var(--burgundy); }
 
 /* ── RESULTS COUNT ──────────────────────────────────── */
 

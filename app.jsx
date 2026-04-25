@@ -228,20 +228,18 @@ function App() {
               <Chip key={c} active={categoryFilters.has(c)} onClick={() => toggleCategory(c)}>{c}</Chip>
             ))}
           </div>
-          <div className="filter-group filter-group-search">
-            <input
-              className="search-input"
-              type="search"
-              placeholder="Search games…"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </div>
         </section>
       )}
 
       <div className="results-bar">
         <span className="results-count">{filtered.length} {filtered.length === 1 ? 'game' : 'games'}</span>
+        <input
+          className="search-input"
+          type="search"
+          placeholder="Search games…"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
         <button
           className="clear-filters-btn"
           style={{ visibility: (playerFilter !== 'all' || difficultyFilter !== 'all' || categoryFilters.size > 0 || search.trim()) ? 'visible' : 'hidden' }}
