@@ -49,6 +49,7 @@ function App() {
   const [playerFilter, setPlayerFilter] = useState('all');
   const [categoryFilters, setCategoryFilters] = useState(new Set());
   const [difficultyFilter, setDifficultyFilter] = useState('all');
+  const [luckFilter, setLuckFilter] = useState('all');
   const [sort, setSort] = useState('featured');
   const [search, setSearch] = useState('');
 
@@ -103,6 +104,9 @@ function App() {
     if (difficultyFilter === 'easy') list = list.filter(g => g.difficulty <= 2);
     else if (difficultyFilter === 'medium') list = list.filter(g => g.difficulty === 3);
     else if (difficultyFilter === 'hard') list = list.filter(g => g.difficulty >= 4);
+    if (luckFilter === 'skillful') list = list.filter(g => g.luck <= 2);
+    else if (luckFilter === 'balanced') list = list.filter(g => g.luck === 3);
+    else if (luckFilter === 'lucky') list = list.filter(g => g.luck >= 4);
 
     const avgFor = (g) => {
       const p = plays[g.id] || [];
@@ -115,9 +119,10 @@ function App() {
     else if (sort === 'short') copy.sort((a, b) => a.minutes - b.minutes);
     else if (sort === 'easy') copy.sort((a, b) => a.difficulty - b.difficulty);
     else if (sort === 'rated') copy.sort((a, b) => avgFor(b) - avgFor(a));
+    else if (sort === 'lucky') copy.sort((a, b) => b.luck - a.luck);
     // 'featured' keeps default order
     return copy;
-  }, [allGames, playerFilter, categoryFilters, difficultyFilter, sort, plays, search]);
+  }, [allGames, playerFilter, categoryFilters, difficultyFilter, luckFilter, sort, plays, search]);
 
   const openGame = filtered.find(g => g.id === openId) || allGames.find(g => g.id === openId);
 
@@ -209,15 +214,13 @@ function App() {
         </div>
 
         <div className="filter-group">
-          <span className="filter-label">Sort</span>
-          <select className="sort-select" value={sort} onChange={e => setSort(e.target.value)}>
-            <option value="featured">Featured order</option>
-            <option value="name">A → Z</option>
-            <option value="short">Shortest first</option>
-            <option value="easy">Easiest first</option>
-            <option value="rated">Highest rated</option>
-          </select>
+          <span className="filter-label">Luck</span>
+          <Chip active={luckFilter === 'all'} onClick={() => setLuckFilter('all')}>Any</Chip>
+          <Chip active={luckFilter === 'skillful'} onClick={() => setLuckFilter('skillful')}>Skillful</Chip>
+          <Chip active={luckFilter === 'balanced'} onClick={() => setLuckFilter('balanced')}>Balanced</Chip>
+          <Chip active={luckFilter === 'lucky'} onClick={() => setLuckFilter('lucky')}>Lucky</Chip>
         </div>
+
       </section>
 
       {categories.length > 1 && (
@@ -233,6 +236,14 @@ function App() {
 
       <div className="results-bar">
         <span className="results-count">{filtered.length} {filtered.length === 1 ? 'game' : 'games'}</span>
+        <select className="sort-select" value={sort} onChange={e => setSort(e.target.value)}>
+          <option value="featured">Featured order</option>
+          <option value="name">A → Z</option>
+          <option value="short">Shortest first</option>
+          <option value="easy">Easiest first</option>
+          <option value="rated">Highest rated</option>
+          <option value="lucky">Luckiest first</option>
+        </select>
         <input
           className="search-input"
           type="search"
@@ -242,8 +253,8 @@ function App() {
         />
         <button
           className="clear-filters-btn"
-          style={{ visibility: (playerFilter !== 'all' || difficultyFilter !== 'all' || categoryFilters.size > 0 || search.trim()) ? 'visible' : 'hidden' }}
-          onClick={() => { setPlayerFilter('all'); setDifficultyFilter('all'); setCategoryFilters(new Set()); setSearch(''); }}
+          style={{ visibility: (playerFilter !== 'all' || difficultyFilter !== 'all' || luckFilter !== 'all' || categoryFilters.size > 0 || search.trim()) ? 'visible' : 'hidden' }}
+          onClick={() => { setPlayerFilter('all'); setDifficultyFilter('all'); setLuckFilter('all'); setCategoryFilters(new Set()); setSearch(''); }}
         >Clear filters</button>
       </div>
 
