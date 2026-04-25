@@ -1203,7 +1203,7 @@ window.GAMES_DATA = [
   },
   {
     id: 'spite-and-malice',
-    name: 'Spite and Malice',
+    name: 'Spite and Malice (Loretta)',
     tagline: "Competitive solitaire — block your rival's stack.",
     players: [2, 3, 4],
     best: 2,
@@ -1216,13 +1216,13 @@ window.GAMES_DATA = [
     description: 'Also called Cat and Mouse — and the inspiration for the commercial game Skip-Bo. Each player races to clear their personal payoff pile by building shared center stacks from Ace to Queen. Manage four personal discard piles as staging ground, and use Kings as wild cards. Block, bait, and deny your opponent the card they need.',
     howTo: [
       'Shuffle two standard decks together (104 cards). Deal 20 cards face-down to each player as their personal "payoff pile" — do NOT look at these. Flip the top card of each payoff pile face-up so everyone can see it. The remaining cards form the central draw pile.',
-      'Deal 5 cards face-up to each player as their starting hand. Set up 4 personal discard columns in front of each player (empty to start). In the center of the table, there is space for up to 12 shared "center stacks" — one per Ace that gets played.',
+      'Deal 5 cards to each player as their starting hand — keep it private. Set up 4 personal discard columns in front of each player (empty to start). In the center of the table, there is space for up to 8 shared "center stacks" — one per Ace that gets played.',
       'Goal: be the first player to empty your payoff pile by playing all 20 cards onto the shared center stacks.',
-      'Center stacks build Ace upward in sequence by suit: once an Ace is played to start a stack, the next card must be the 2 of that suit, then 3, and so on up to Queen (suits stop at Queen, not King). Kings do not go on center stacks.',
-      'On YOUR turn: (1) Play cards from your HAND onto center stacks wherever they fit in sequence. (2) Play the face-up TOP of your payoff pile onto a center stack if it fits. (3) Play cards from your HAND onto your own personal discard columns — you may place any card on an empty column, or on top of an existing column in any order. (4) Play the TOP card of a discard column onto a center stack if it fits.',
+      'Center stacks must start at Ace and go in order up to queen: once an Ace is played to start a stack, the next card must be a 2, then 3, and so on up to a Queen (pile stops at Queen, not King). Kings are not part of the list.',
+      'On YOUR turn: If you have fewer than 5 cards in your hand, draw enough cards from the central draw pile so that you have 5. Play cards using three different methods. (1) Play cards from your HAND onto center stacks wherever they fit in sequence. (2) Play the face-up TOP of your payoff pile onto a center stack if it fits. (3) Play the TOP card of a discard column onto a center stack if it fits.',
       'Kings are wild: play a King from your hand onto any center stack to represent whatever card that stack needs next.',
-      'Ending your turn: draw enough cards from the central draw pile to bring your hand back to 5 cards.',
-      'You cannot play from one personal discard column to another. You cannot play an opponent\'s discard columns. You may play AS MANY cards as you want to center stacks on your turn before refilling — but you may only play one card from your payoff pile per turn.',
+      'Ending your turn: play a single card that is not an Ace from your HAND onto your own personal discard columns — you may place any card on an empty column, or on top of an existing column in any order. You must have a card in each of the 4 discard columns before you can place a card on top of another card in a column.',
+      'You may play AS MANY cards as you want to center stacks on your turn — and if you have no cards left in your hand, you may pick up 5 more cards and continue your turn.',
       'The first player to flip over the last card of their payoff pile and play it onto a center stack wins the hand.'
     ]
   }
