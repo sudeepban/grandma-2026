@@ -28,7 +28,6 @@ function decorateGames(games) {
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accentColor": "burgundy",
-  "showOnly3to5": true,
   "density": "cozy",
   "headerStyle": "ribbon"
 }/*EDITMODE-END*/;
@@ -47,15 +46,11 @@ function App() {
   const [plays, setPlays] = useState({});
   const [syncStatus, setSyncStatus] = useState('connecting'); // connecting | live | error
   const [openId, setOpenId] = useState(null);
-  const [playerFilter, setPlayerFilter] = useState(tweaks.showOnly3to5 ? 'grandma' : 'all');
+  const [playerFilter, setPlayerFilter] = useState('all');
   const [categoryFilters, setCategoryFilters] = useState(new Set());
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [sort, setSort] = useState('featured');
-
-  // If tweak for 3-5 default changes, reflect it
-  useEffect(() => {
-    setPlayerFilter(tweaks.showOnly3to5 ? 'grandma' : 'all');
-  }, [tweaks.showOnly3to5]);
+  const [search, setSearch] = useState('');
 
   // Apply accent preset
   useEffect(() => {
@@ -90,12 +85,21 @@ function App() {
 
   const filtered = useMemo(() => {
     let list = allGames;
-    if (playerFilter === 'grandma') list = list.filter(g => g.players.some(n => n >= 3 && n <= 5));
-    else if (playerFilter !== 'all') {
+    if (playerFilter === '6+') {
+      list = list.filter(g => g.players.some(n => n >= 6));
+    } else if (playerFilter !== 'all') {
       const n = parseInt(playerFilter, 10);
       list = list.filter(g => g.players.includes(n));
     }
     if (categoryFilters.size > 0) list = list.filter(g => Array.from(categoryFilters).every(c => g.categories.includes(c)));
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      list = list.filter(g =>
+        g.name.toLowerCase().includes(q) ||
+        g.tagline.toLowerCase().includes(q) ||
+        g.description.toLowerCase().includes(q)
+      );
+    }
     if (difficultyFilter === 'easy') list = list.filter(g => g.difficulty <= 2);
     else if (difficultyFilter === 'medium') list = list.filter(g => g.difficulty === 3);
     else if (difficultyFilter === 'hard') list = list.filter(g => g.difficulty >= 4);
@@ -113,7 +117,7 @@ function App() {
     else if (sort === 'rated') copy.sort((a, b) => avgFor(b) - avgFor(a));
     // 'featured' keeps default order
     return copy;
-  }, [allGames, playerFilter, categoryFilters, difficultyFilter, sort, plays]);
+  }, [allGames, playerFilter, categoryFilters, difficultyFilter, sort, plays, search]);
 
   const openGame = filtered.find(g => g.id === openId) || allGames.find(g => g.id === openId);
 
@@ -160,26 +164,20 @@ function App() {
           <span className="banner-line" />
         </div>
         <div className="title-block">
-          <div className="eyebrow">A Birthday Card Night · For Grandma</div>
+          <div className="eyebrow">A Birthday Collection of Card Games · For Grandma</div>
           <h1 className="site-title">
             50{tweaks.headerStyle === 'ribbon' && <span className="ribbon"> ♦ </span>}
             {tweaks.headerStyle !== 'ribbon' && ' '}
             Card Games for Grandma
           </h1>
           <p className="site-sub">
-            These are your games, Grandma — 50 of the best, all perfect for a table of three to five.
-            Pick one, play it tonight, and we'll log how it went so we never forget which ones were your favorites.
+            50 of the best card games - a collection for us to play through together and enjoy.
           </p>
         </div>
         <div className="header-meta">
-          <div className="hm-item"><strong>{allGames.length}</strong> games curated</div>
-          <span className="hm-dot" />
-          <div className="hm-item"><strong>3–5</strong> players each</div>
-          <span className="hm-dot" />
           <div className="hm-item">
             <strong>{totalPlays}</strong> {totalPlays === 1 ? 'play' : 'plays'} logged
           </div>
-          <span className="hm-dot" />
           <div className="hm-item">
             <span className={`sync-pill sync-${syncStatus}`}>
               <span className="sync-dot" />
@@ -194,19 +192,20 @@ function App() {
       <section className="filters">
         <div className="filter-group">
           <span className="filter-label">Players</span>
-          <Chip active={playerFilter === 'grandma'} onClick={() => setPlayerFilter('grandma')}>3–5 (Grandma's table)</Chip>
+          <Chip active={playerFilter === '2'} onClick={() => setPlayerFilter('2')}>2</Chip>
           <Chip active={playerFilter === '3'} onClick={() => setPlayerFilter('3')}>3</Chip>
           <Chip active={playerFilter === '4'} onClick={() => setPlayerFilter('4')}>4</Chip>
           <Chip active={playerFilter === '5'} onClick={() => setPlayerFilter('5')}>5</Chip>
+          <Chip active={playerFilter === '6+'} onClick={() => setPlayerFilter('6+')}>6+</Chip>
           <Chip active={playerFilter === 'all'} onClick={() => setPlayerFilter('all')}>All</Chip>
         </div>
 
         <div className="filter-group">
           <span className="filter-label">Difficulty</span>
           <Chip active={difficultyFilter === 'all'} onClick={() => setDifficultyFilter('all')}>Any</Chip>
-          <Chip active={difficultyFilter === 'easy'} onClick={() => setDifficultyFilter('easy')}>Easy</Chip>
-          <Chip active={difficultyFilter === 'medium'} onClick={() => setDifficultyFilter('medium')}>Medium</Chip>
-          <Chip active={difficultyFilter === 'hard'} onClick={() => setDifficultyFilter('hard')}>Brainy</Chip>
+          <Chip active={difficultyFilter === 'easy'} onClick={() => setDifficultyFilter('easy')}>Simple</Chip>
+          <Chip active={difficultyFilter === 'medium'} onClick={() => setDifficultyFilter('medium')}>Moderate</Chip>
+          <Chip active={difficultyFilter === 'hard'} onClick={() => setDifficultyFilter('hard')}>Complex</Chip>
         </div>
 
         <div className="filter-group">
@@ -228,12 +227,27 @@ function App() {
             {categories.map(c => (
               <Chip key={c} active={categoryFilters.has(c)} onClick={() => toggleCategory(c)}>{c}</Chip>
             ))}
-            {categoryFilters.size > 0 && (
-              <Chip active={false} onClick={() => setCategoryFilters(new Set())}>Clear</Chip>
-            )}
+          </div>
+          <div className="filter-group filter-group-search">
+            <input
+              className="search-input"
+              type="search"
+              placeholder="Search games…"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
           </div>
         </section>
       )}
+
+      <div className="results-bar">
+        <span className="results-count">{filtered.length} {filtered.length === 1 ? 'game' : 'games'}</span>
+        <button
+          className="clear-filters-btn"
+          style={{ visibility: (playerFilter !== 'all' || difficultyFilter !== 'all' || categoryFilters.size > 0 || search.trim()) ? 'visible' : 'hidden' }}
+          onClick={() => { setPlayerFilter('all'); setDifficultyFilter('all'); setCategoryFilters(new Set()); setSearch(''); }}
+        >Clear filters</button>
+      </div>
 
       <main className="games-grid">
         {filtered.map(g => (
@@ -290,13 +304,6 @@ function App() {
               { value: 'ribbon', label: 'With diamond' },
               { value: 'plain', label: 'No diamond' }
             ]}
-          />
-        </TweakSection>
-        <TweakSection title="Default filter">
-          <TweakToggle
-            label="Start with 3–5 players filter on"
-            value={tweaks.showOnly3to5}
-            onChange={v => tweaks.set('showOnly3to5', v)}
           />
         </TweakSection>
       </TweaksPanel>
