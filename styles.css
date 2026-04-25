@@ -239,6 +239,58 @@ input, textarea, select { font-family: inherit; color: inherit; }
   cursor: pointer;
 }
 
+/* ── SEARCH ─────────────────────────────────────────── */
+
+.search-input {
+  flex: 1;
+  background: var(--cream);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+  min-width: 0;
+  transition: border-color 0.15s;
+}
+.search-input::placeholder { color: var(--ink-faint); }
+.search-input:focus { border-color: var(--burgundy); }
+
+/* ── RESULTS COUNT ──────────────────────────────────── */
+
+.results-bar {
+  max-width: 1240px;
+  margin: 16px auto 0;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.results-count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.clear-filters-btn {
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.clear-filters-btn:hover {
+  border-color: var(--burgundy-soft);
+  color: var(--burgundy);
+}
+
 /* ── GRID ───────────────────────────────────────────── */
 
 .games-grid {
