@@ -10,6 +10,10 @@ function durationCategory(minutes) {
   return null;
 }
 
+function isStandardDeck(deck) {
+  return /^standard/i.test(deck);
+}
+
 // Decorate games with a corner suit/rank for visual flair, and inject a duration category
 function decorateGames(games) {
   const combos = [
@@ -22,7 +26,11 @@ function decorateGames(games) {
   return games.map((g, i) => ({
     ...g,
     corner: combos[i % combos.length],
-    categories: [...g.categories, ...(durationCategory(g.minutes) ? [durationCategory(g.minutes)] : [])],
+    categories: [
+      ...g.categories,
+      ...(durationCategory(g.minutes) ? [durationCategory(g.minutes)] : []),
+      isStandardDeck(g.deck) ? 'Standard deck' : 'Special deck',
+    ],
   }));
 }
 
@@ -107,11 +115,9 @@ function App() {
     if (luckFilter === 'skillful') list = list.filter(g => g.luck <= 2);
     else if (luckFilter === 'balanced') list = list.filter(g => g.luck === 3);
     else if (luckFilter === 'lucky') list = list.filter(g => g.luck >= 4);
-
     const avgFor = (g) => {
-      const p = plays[g.id] || [];
-      if (!p.length) return -1;
-      return p.reduce((s, x) => s + x.rating, 0) / p.length;
+      const avg = window.overallAvgFromPlays(plays[g.id] || []);
+      return avg === null ? -1 : avg;
     };
 
     const copy = [...list];

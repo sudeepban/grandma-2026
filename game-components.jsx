@@ -47,10 +47,7 @@ function NameInput({ id, value, onChange, placeholder, knownNames }) {
 }
 
 function GameCard({ game, onOpen, plays }) {
-  const ratedPlays = plays.filter(p => p.rating > 0);
-  const overallAvg = ratedPlays.length > 0
-    ? ratedPlays.reduce((s, p) => s + p.rating, 0) / ratedPlays.length
-    : null;
+  const overallAvg = overallAvgFromPlays(plays);
   const accent = game.accent || 'burgundy';
   return (
     <article className={`game-card accent-${accent}`} onClick={() => onOpen(game)}>
@@ -106,6 +103,12 @@ function perPlayerAverages(plays) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function overallAvgFromPlays(plays) {
+  const playerAvgs = perPlayerAverages(plays);
+  if (playerAvgs.length === 0) return null;
+  return playerAvgs.reduce((s, p) => s + p.avg, 0) / playerAvgs.length;
+}
+
 function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay, knownNames }) {
   const [tab, setTab] = React.useState('how');
   const [formOpen, setFormOpen] = React.useState(false);
@@ -118,10 +121,7 @@ function GameDetail({ game, onClose, plays, onAddPlay, onDeletePlay, knownNames 
 
   if (!game) return null;
   const playerAvgs = perPlayerAverages(plays);
-  const ratedPlays = plays.filter(p => p.rating > 0);
-  const overallAvg = ratedPlays.length > 0
-    ? ratedPlays.reduce((s, p) => s + p.rating, 0) / ratedPlays.length
-    : null;
+  const overallAvg = overallAvgFromPlays(plays);
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -388,4 +388,4 @@ function PlayEntry({ play, onDelete }) {
   );
 }
 
-Object.assign(window, { GameCard, GameDetail, PlayLogForm, PlayEntry });
+Object.assign(window, { GameCard, GameDetail, PlayLogForm, PlayEntry, overallAvgFromPlays });
