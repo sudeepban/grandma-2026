@@ -273,6 +273,7 @@ input, textarea, select { font-family: inherit; color: inherit; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-faint);
+  min-width: 7em;
 }
 .clear-filters-btn {
   background: transparent;
@@ -1106,7 +1107,9 @@ input, textarea, select { font-family: inherit; color: inherit; }
   .modal-stats { grid-template-columns: repeat(2, 1fr); }
   .pf-row { grid-template-columns: 1fr; }
   .site-header { padding: 36px 20px 20px; }
-  .filters, .games-grid, .site-footer { padding-left: 20px; padding-right: 20px; }
+  .filters, .games-grid, .results-bar, .site-footer { padding-left: 20px; padding-right: 20px; }
+  .results-bar { flex-wrap: wrap; }
+  .search-input { flex: 1 1 100%; }
   .filters { gap: 0; justify-content: flex-start; }
   .filter-group {
     width: 100%;
