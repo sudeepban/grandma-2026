@@ -53,6 +53,7 @@ function App() {
   const allGames = useMemo(() => decorateGames(window.GAMES_DATA), []);
   const [plays, setPlays] = useState({});
   const [syncStatus, setSyncStatus] = useState('connecting'); // connecting | live | error
+  const [currentUser, setCurrentUser] = useState(null);
   const [openId, setOpenId] = useState(null);
   const [playerFilter, setPlayerFilter] = useState('all');
   const [categoryFilters, setCategoryFilters] = useState(new Set());
@@ -76,6 +77,12 @@ function App() {
       else if (meta.ready) setSyncStatus('live');
     });
     return unsub;
+  }, []);
+
+  // Subscribe to auth state
+  useEffect(() => {
+    if (!window.GameSync) return;
+    return window.GameSync.onAuthChange(setCurrentUser);
   }, []);
 
   const categories = useMemo(() => {
@@ -138,7 +145,7 @@ function App() {
       // Snapshot listener updates state automatically
     } catch (e) {
       console.error(e);
-      alert("Couldn't save — check you're online and the family passphrase is correct.");
+      alert("Couldn't save — check you're online and signed in.");
     }
   }
   async function deletePlay(gameId, playId) {
@@ -196,6 +203,21 @@ function App() {
               {syncStatus === 'live' && 'Live · synced'}
               {syncStatus === 'error' && 'Offline'}
             </span>
+          </div>
+          <div className="hm-item">
+            {currentUser ? (
+              <span className="auth-pill auth-pill-in">
+                {currentUser.photoURL && (
+                  <img className="auth-avatar" src={currentUser.photoURL} alt="" referrerPolicy="no-referrer" />
+                )}
+                <span>{currentUser.displayName || currentUser.email}</span>
+                <button className="auth-signout-btn" onClick={() => window.GameSync.signOut()}>Sign out</button>
+              </span>
+            ) : (
+              <button className="auth-pill auth-pill-out" onClick={() => window.GameSync.signIn().catch(console.error)}>
+                Sign in
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -289,6 +311,7 @@ function App() {
           onAddPlay={addPlay}
           onDeletePlay={deletePlay}
           knownNames={knownNames}
+          currentUser={currentUser}
         />
       )}
 

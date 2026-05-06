@@ -3,8 +3,8 @@
     "plays": {
       ".read": true,
       "$playId": {
-        ".write": "(newData.exists() && !data.exists() && newData.child('passphrase').val() === 'grandma2026') || (!newData.exists() && data.child('passphrase').val() === 'grandma2026')",
-        ".validate": "newData.hasChildren(['gameId', 'rating', 'who', 'date', 'passphrase']) && newData.child('rating').isNumber() && newData.child('rating').val() >= 1 && newData.child('rating').val() <= 5 && newData.child('who').isString() && newData.child('who').val().length >= 1 && newData.child('who').val().length <= 120 && newData.child('gameId').isString() && newData.child('gameId').val().length <= 40 && (!newData.hasChild('note') || newData.child('note').val().length <= 600) && (!newData.hasChild('winner') || newData.child('winner').val().length <= 60)"
+        ".write": "auth != null && (auth.token.email === 'sudeepban@gmail.com' || auth.token.email === 'sdur211@gmail.com' || auth.token.email === 'kiranpie99@gmail.com' || auth.token.email === 'miaban20002@gmail.com' || auth.token.email === 'kumabd1112@gmail.com')",
+        ".validate": "newData.hasChildren(['gameId', 'rating', 'who', 'date']) && newData.child('rating').isNumber() && newData.child('rating').val() >= 1 && newData.child('rating').val() <= 5 && newData.child('who').isString() && newData.child('who').val().length >= 1 && newData.child('who').val().length <= 120 && newData.child('gameId').isString() && newData.child('gameId').val().length <= 40 && (!newData.hasChild('note') || newData.child('note').val().length <= 600) && (!newData.hasChild('winner') || newData.child('winner').val().length <= 60)"
       }
     }
   }
