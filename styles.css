@@ -221,14 +221,14 @@ input, textarea, select { font-family: inherit; color: inherit; }
   border-radius: 6px;
   border: 1px solid var(--rule-strong);
   background: #fff;
-  color: var(--ink);
+  color: #1f1f1f;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: box-shadow 0.15s, border-color 0.15s;
 }
-.auth-google-btn:hover { box-shadow: 0 1px 6px rgba(0,0,0,0.12); border-color: var(--rule-strong); }
+.auth-google-btn:hover { box-shadow: 0 1px 6px rgba(0,0,0,0.12); border-color: #aaa; }
 .auth-google-icon { width: 18px; height: 18px; flex-shrink: 0; }
 
 @keyframes pulse {

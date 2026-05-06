@@ -142,6 +142,7 @@
   async function signIn() {
     if (!state.auth || !state._authMod) throw new Error('Auth not ready');
     const provider = new state._authMod.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
     await state._authMod.signInWithPopup(state.auth, provider);
   }
 
