@@ -4,23 +4,36 @@
 (function () {
   const state = {
     db: null,
+    auth: null,
     ready: false,
     error: null,
-    listeners: new Set(), // fn(plays, meta) -> void, where plays = { [gameId]: [entry, ...] }
-    playsByGame: {},       // live cache
-    unsub: null
+    currentUser: null,
+    listeners: new Set(),     // plays listeners: fn(plays, meta)
+    authListeners: new Set(), // auth listeners: fn(user)
+    playsByGame: {},
+    unsub: null,
+    _rtdb: null,
+    _authMod: null,
   };
 
   async function init() {
     if (state.ready || state.error) return;
     try {
-      const appMod = await import('https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js');
-      const dbMod  = await import('https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js');
-      const app = appMod.initializeApp(window.FIREBASE_CONFIG);
-      const db  = dbMod.getDatabase(app);
-      state.db    = db;
-      state._rtdb = dbMod;
-      state.ready = true;
+      const appMod  = await import('https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js');
+      const dbMod   = await import('https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js');
+      const authMod = await import('https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js');
+      const app  = appMod.initializeApp(window.FIREBASE_CONFIG);
+      const db   = dbMod.getDatabase(app);
+      const auth = authMod.getAuth(app);
+      state.db       = db;
+      state.auth     = auth;
+      state._rtdb    = dbMod;
+      state._authMod = authMod;
+      state.ready    = true;
+      authMod.onAuthStateChanged(auth, (user) => {
+        state.currentUser = user;
+        state.authListeners.forEach(fn => { try { fn(user); } catch (e) { console.error(e); } });
+      });
       subscribe();
     } catch (e) {
       console.error('Firebase init failed', e);
@@ -85,6 +98,7 @@
 
   async function addPlay(gameId, entry) {
     if (!state.ready) throw new Error('Realtime DB not ready');
+    if (!state.currentUser) throw new Error('Not signed in');
     const { ref, push } = state._rtdb;
     const who = entry.who ||
       (Array.isArray(entry.ratings) ? entry.ratings.map(r => r.name).filter(Boolean).join(', ') : '');
@@ -96,7 +110,6 @@
       date: entry.date,
       note: entry.note || '',
       winner: entry.winner || '',
-      passphrase: window.FAMILY_PASSPHRASE || '',
       createdAt: Date.now()
     };
     if (Array.isArray(entry.ratings) && entry.ratings.length > 0) {
@@ -119,6 +132,24 @@
     return () => state.listeners.delete(fn);
   }
 
-  window.GameSync = { init, addPlay, deletePlay, onPlaysChange };
+  function onAuthChange(fn) {
+    state.authListeners.add(fn);
+    // Immediately push current auth state
+    fn(state.currentUser);
+    return () => state.authListeners.delete(fn);
+  }
+
+  async function signIn() {
+    if (!state.auth || !state._authMod) throw new Error('Auth not ready');
+    const provider = new state._authMod.GoogleAuthProvider();
+    await state._authMod.signInWithPopup(state.auth, provider);
+  }
+
+  async function signOut() {
+    if (!state.auth || !state._authMod) throw new Error('Auth not ready');
+    await state._authMod.signOut(state.auth);
+  }
+
+  window.GameSync = { init, addPlay, deletePlay, onPlaysChange, onAuthChange, signIn, signOut };
   init();
 })();

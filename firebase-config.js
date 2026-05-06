@@ -13,6 +13,3 @@ window.FIREBASE_CONFIG = {
   measurementId: "G-VGQEJ8V1GS"
 };
 
-// Optional "family passphrase" — client-side gate to reduce spam.
-// Anyone with the link + passphrase can log plays. Set to "" to disable gate.
-window.FAMILY_PASSPHRASE = "grandma2026";
