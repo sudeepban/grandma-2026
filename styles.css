@@ -56,6 +56,126 @@ input, textarea, select { font-family: inherit; color: inherit; }
   position: relative;
 }
 
+.stats-btn {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 50%;
+  color: var(--burgundy);
+  padding: 8px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.stats-btn:hover {
+  background: var(--burgundy);
+  border-color: var(--burgundy);
+  color: var(--cream);
+}
+.stats-btn svg { width: 100%; height: 100%; }
+
+.stats-sheet {
+  max-width: 580px;
+}
+.stats-screen-title {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 500;
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+.stats-screen-placeholder {
+  color: var(--ink-faint);
+  font-style: italic;
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Most-played highlight */
+.stats-highlight {
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+}
+.sh-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 6px;
+}
+.sh-game {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.sh-count {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
+/* Top-5 bar chart */
+.sc-heading {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
+}
+.sc-row {
+  display: grid;
+  grid-template-columns: 20px 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sc-rank {
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.sc-name {
+  font-size: 14px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sc-bar-track {
+  width: 160px;
+  height: 8px;
+  background: var(--cream-deep);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sc-bar-fill {
+  height: 100%;
+  background: var(--burgundy);
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sc-count {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+  min-width: 16px;
+  text-align: right;
+}
+
 .banner {
   display: flex;
   align-items: center;

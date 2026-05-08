@@ -55,6 +55,7 @@ function App() {
   const [syncStatus, setSyncStatus] = useState('connecting'); // connecting | live | error
   const [currentUser, setCurrentUser] = useState(null);
   const [openId, setOpenId] = useState(null);
+  const [statsOpen, setStatsOpen] = useState(false);
   const [playerFilter, setPlayerFilter] = useState('all');
   const [categoryFilters, setCategoryFilters] = useState(new Set());
   const [difficultyFilter, setDifficultyFilter] = useState('all');
@@ -181,6 +182,13 @@ function App() {
           <span className="banner-suit">♠ ♥ ♦ ♣</span>
           <span className="banner-line" />
         </div>
+        <button className="stats-btn" onClick={() => setStatsOpen(true)} aria-label="Stats">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
+            <path d="M12 2a10 10 0 0 1 10 10" />
+          </svg>
+        </button>
+
         <div className="title-block">
           <div className="eyebrow">A Birthday Collection of Card Games · For Grandma</div>
           <h1 className="site-title">
@@ -321,6 +329,10 @@ function App() {
         <div className="footer-credit">Shuffle · Deal · Remember</div>
       </footer>
 
+      {statsOpen && (
+        <StatsScreen plays={plays} allGames={allGames} onClose={() => setStatsOpen(false)} />
+      )}
+
       <TweaksPanel title="Tweaks">
         <TweakSection title="Accent color">
           <TweakRadio
@@ -345,6 +357,60 @@ function App() {
           />
         </TweakSection>
       </TweaksPanel>
+    </div>
+  );
+}
+
+function StatsScreen({ plays, allGames, onClose }) {
+  const topGames = useMemo(() => {
+    return allGames
+      .map(g => ({ game: g, count: (plays[g.id] || []).length }))
+      .filter(x => x.count > 0)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+  }, [plays, allGames]);
+
+  const maxCount = topGames[0]?.count || 1;
+  const mostPlayed = topGames[0];
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal-sheet stats-sheet" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>✕</button>
+        <h2 className="stats-screen-title">Stats</h2>
+
+        {mostPlayed ? (
+          <>
+            <div className="stats-highlight">
+              <div className="sh-label">Most played</div>
+              <div className="sh-game">{mostPlayed.game.name}</div>
+              <div className="sh-count">{mostPlayed.count} {mostPlayed.count === 1 ? 'play' : 'plays'}</div>
+            </div>
+
+            <div className="stats-chart">
+              <div className="sc-heading">Top 5 most played</div>
+              {topGames.map(({ game, count }, i) => (
+                <div key={game.id} className="sc-row">
+                  <div className="sc-rank">{i + 1}</div>
+                  <div className="sc-name">{game.name}</div>
+                  <div className="sc-bar-track">
+                    <div className="sc-bar-fill" style={{ width: `${(count / maxCount) * 100}%` }} />
+                  </div>
+                  <div className="sc-count">{count}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="stats-screen-placeholder">No plays logged yet — get playing!</p>
+        )}
+      </div>
     </div>
   );
 }

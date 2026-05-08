@@ -761,7 +761,7 @@ window.GAMES_DATA = [
   },
   {
     id: 'palace',
-    name: 'Palace',
+    name: 'Castle',
     tagline: 'Empty your hand, your face-ups, then gamble blind.',
     players: [2, 3, 4, 5, 6],
     best: 4,
@@ -771,16 +771,16 @@ window.GAMES_DATA = [
     deck: 'Standard 52',
     categories: ['Shedding', 'Social'],
     notePlaceholder: 'Blind-picked a 2 on the last face-down card. Saved.',
-    description: 'Also called Karma or Shed. Play equal or higher cards onto the pile to shed your hand, then face-up palace cards, then blind face-down ones. Special cards shake things up: 2 resets, 10 burns the pile. Last to clear loses.',
+    description: 'Also called Karma or Shed. Play equal or higher cards onto the pile to shed your hand, then face-up castle cards, then blind face-down ones. Special cards shake things up: 2 resets, 10 burns the pile. Last to clear loses.',
     howTo: [
-      'Set up each player\'s "palace": deal 3 cards face-DOWN to each player, then deal 3 more face-UP on top of those face-down cards, and finally 3 cards into each player\'s hand. Players look at their hand cards but must NOT look at their face-down cards.',
-      'Before play begins, each player may swap any cards from their hand with any of their face-up palace cards to improve their face-up selection. Once play starts, no more swapping.',
+      'Set up each player\'s "castle": deal 3 cards face-DOWN to each player, then deal 3 more face-UP on top of those face-down cards, and finally 3 cards into each player\'s hand. Players look at their hand cards but must NOT look at their face-down cards.',
+      'Before play begins, each player may swap any cards from their hand with any of their face-up castle cards to improve their face-up selection. Once play starts, no more swapping.',
       'The player with the lowest card leads it to start the discard pile. On your turn, play one or more cards of equal or higher rank than the current top of the discard pile. You may play multiple cards of the SAME rank at once.',
       'Special cards: 2 resets the pile value back to "anything can be played on it." 10 burns the entire pile — remove it from the game and you get to lead again from scratch. 7 means the NEXT player must play a card of 7 or lower (reverses the "higher" rule for one turn only). 4 of a kind played consecutively on the pile also burns the pile.',
       'If you cannot (or choose not to) play a card, you must pick up the entire discard pile into your hand. Your turn ends.',
-      'The phases of play: First, play from your hand until it\'s empty. Then play from your face-up palace cards. Finally, flip and play face-down cards one at a time — you cannot peek before playing. If a flipped face-down card cannot be played, pick up the pile along with the flipped card.',
+      'The phases of play: First, play from your hand until it\'s empty. Then play from your face-up castle cards. Finally, flip and play face-down cards one at a time — you cannot peek before playing. If a flipped face-down card cannot be played, pick up the pile along with the flipped card.',
       'After playing from your hand, always refill your hand to 3 cards from the stock (during the hand phase). Once the stock is gone, you don\'t refill.',
-      'The LAST player to clear all three piles (hand, face-up, face-down) loses — they are the "palace." Everyone else wins. Play as many rounds as you like.'
+      'The LAST player to clear all three piles (hand, face-up, face-down) loses — they are the "castle." Everyone else wins. Play as many rounds as you like.'
     ]
   },
   {
