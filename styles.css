@@ -89,6 +89,46 @@ input, textarea, select { font-family: inherit; color: inherit; }
   margin: 0 0 24px;
   color: var(--ink);
 }
+/* Stats summary row */
+.stats-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.ss-item {
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.ss-item-wide {
+  grid-column: span 1;
+}
+.ss-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.ss-num-sm {
+  font-size: 17px;
+  line-height: 1.25;
+}
+.ss-of {
+  font-size: 16px;
+  color: var(--ink-faint);
+}
+.ss-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
 .stats-screen-placeholder {
   color: var(--ink-faint);
   font-style: italic;
@@ -1233,6 +1273,28 @@ input, textarea, select { font-family: inherit; color: inherit; }
   gap: 10px;
 }
 .pf-player-row .name-input-wrap { flex: 1; min-width: 0; }
+.pf-won-btn {
+  background: transparent;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 6px;
+  color: var(--ink-faint);
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.pf-won-btn:hover { border-color: var(--gold); color: var(--gold); }
+.pf-won-btn.pf-won-active {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: var(--cream);
+}
+
 .pf-player-remove {
   background: transparent;
   border: none;
@@ -1364,6 +1426,21 @@ input, textarea, select { font-family: inherit; color: inherit; }
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: 0 -6px;
+}
+.pe-player-winner {
+  background: oklch(0.70 0.10 75 / 0.13);
+}
+.pe-winner-crown {
+  font-size: 13px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.pe-crown-hidden { visibility: hidden; }
+.pe-player-winner .pe-player-name {
+  color: var(--gold);
 }
 .pe-player-name {
   font-family: var(--font-display);

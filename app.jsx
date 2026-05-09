@@ -572,6 +572,20 @@ function StatsScreen({ plays, allGames, onClose }) {
 
   const awards = useMemo(() => computeAwards(plays, allGames), [plays, allGames]);
 
+  const summary = useMemo(() => {
+    const uniquePlayers = new Set();
+    let gamesPlayed = 0;
+    let totalPlays = 0;
+    for (const gamePlays of Object.values(plays)) {
+      if (gamePlays.length > 0) gamesPlayed++;
+      totalPlays += gamePlays.length;
+      gamePlays.forEach(play => {
+        if (Array.isArray(play.ratings)) play.ratings.forEach(r => { if (r.name) uniquePlayers.add(r.name); });
+      });
+    }
+    return { uniquePlayers: uniquePlayers.size, gamesPlayed, totalPlays };
+  }, [plays, allGames]);
+
   const maxCount = topGames[0]?.count || 1;
   const mostPlayed = topGames[0];
 
@@ -592,6 +606,23 @@ function StatsScreen({ plays, allGames, onClose }) {
         <div className="modal-sheet stats-sheet" onClick={e => e.stopPropagation()}>
           <button className="modal-close" onClick={onClose}>✕</button>
           <h2 className="stats-screen-title">Stats</h2>
+
+          {summary.gamesPlayed > 0 && (
+            <div className="stats-summary">
+              <div className="ss-item">
+                <div className="ss-num">{summary.uniquePlayers}</div>
+                <div className="ss-label">Players</div>
+              </div>
+              <div className="ss-item">
+                <div className="ss-num">{summary.gamesPlayed}<span className="ss-of"> of {allGames.length}</span></div>
+                <div className="ss-label">Games explored</div>
+              </div>
+              <div className="ss-item">
+                <div className="ss-num">{summary.totalPlays}</div>
+                <div className="ss-label">Total plays</div>
+              </div>
+            </div>
+          )}
 
           {mostPlayed ? (
             <>
