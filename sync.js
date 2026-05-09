@@ -125,6 +125,7 @@
     await remove(ref(state.db, 'plays/' + playId));
   }
 
+
   function onPlaysChange(fn) {
     state.listeners.add(fn);
     // Immediately push current state

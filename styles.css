@@ -176,6 +176,126 @@ input, textarea, select { font-family: inherit; color: inherit; }
   text-align: right;
 }
 
+/* ── PLAYER AWARDS ───────────────────────────────────── */
+.awards-section {
+  margin-top: 28px;
+}
+.awards-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+.awards-row::-webkit-scrollbar { height: 4px; }
+.awards-row::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 2px; }
+
+.award-card {
+  flex: 0 0 190px;
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 22px 20px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.award-card:hover {
+  border-color: var(--burgundy);
+  background: var(--cream-deep);
+}
+.ac-icon {
+  font-size: 26px;
+  color: var(--burgundy);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.ac-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.ac-name {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-top: 4px;
+  word-break: break-word;
+}
+.ac-stat {
+  font-size: 14px;
+  color: var(--burgundy-soft);
+  margin-top: 3px;
+}
+
+/* ── AWARD DEFINITION POPUP ──────────────────────────── */
+.award-def-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 8, 35, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  padding: 24px;
+}
+.award-def-popup {
+  background: var(--cream);
+  border-radius: 18px;
+  padding: 36px 32px 32px;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.2s ease;
+}
+.award-def-icon {
+  font-size: 32px;
+  color: var(--burgundy);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.award-def-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+.award-def-name {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+}
+.award-def-stat {
+  font-size: 15px;
+  color: var(--burgundy);
+  margin-top: 2px;
+  margin-bottom: 18px;
+}
+.award-def-body {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+
 .banner {
   display: flex;
   align-items: center;
