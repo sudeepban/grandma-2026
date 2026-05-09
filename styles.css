@@ -1500,6 +1500,33 @@ input, textarea, select { font-family: inherit; color: inherit; }
   .filter-group:last-child { border-bottom: none; padding-bottom: 4px; }
 }
 
+@media (max-width: 520px) {
+  /* Log summary: name on its own line, stars + avg + count below */
+  .log-summary-player {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .lsp-name {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .lsp-count {
+    margin-left: 0;
+  }
+
+  /* Play form: name input full-width on first line, controls on second */
+  .pf-player-row {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .pf-player-row .name-input-wrap {
+    flex: 1 1 100%;
+  }
+  .pf-player-row .star-row {
+    font-size: 26px !important;
+  }
+}
+
 /* Scrollbar polish */
 .modal-backdrop::-webkit-scrollbar { width: 10px; }
 .modal-backdrop::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 4px; }
